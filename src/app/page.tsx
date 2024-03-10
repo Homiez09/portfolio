@@ -18,10 +18,10 @@ export default function Home() {
   return (
     <div className="select-none">
       <Navbar />
-      <main className="flex flex-row justify-center items-center mt-44 max-[1350px]:mt-6 w-full max-[1350px]:w-full">
-        <div className="flex w-[1350px] max-[1350px]:w-auto">
-          <div className="flex flex-col lg:mx-15 md:mx-10 max-md:mx-5 items-center justify-center">
-            <div className="flex flex-row w-[1350px] max-[1350px]:w-full max-[1350px]:flex-col-reverse gap-5 items-center justify-center px-20 max-[1350px]:px-0">
+      <main className="flex justify-center mt-28 max-[1350px]:mt-6 w-full">
+        <div className="flex container max-[1350px]:w-auto">
+          <div className="flex flex-col w-full mx-5 items-center justify-center">
+            <div className="flex flex-row w-full max-[1350px]:flex-col-reverse gap-5 items-center justify-center  max-[1350px]:px-0">
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 100, x: 0 }}
@@ -59,7 +59,7 @@ export default function Home() {
                   }
                   el!.classList.add("image-popup");
                 }}
-                  id="profile-phum" className="w-full rounded-full drop-shadow-md cursor-pointer" src="/phum.jpeg" alt="Phumrapee Soenvanichakul (HomieZ09)" width={500} height={500} />
+                  id="profile-phum" className="w-auto rounded-full drop-shadow-md cursor-pointer" src="/phum.jpeg" alt="Phumrapee Soenvanichakul (HomieZ09)" width={500} height={500} />
               </motion.div>
 
             </div>
