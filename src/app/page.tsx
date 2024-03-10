@@ -18,15 +18,15 @@ export default function Home() {
   return (
     <div className="select-none">
       <Navbar />
-      <main className="flex flex-row justify-center items-center mt-44 max-[1300px]:mt-6 w-full max-[1300px]:w-full">
-        <div className="flex w-[1300px] max-[1300px]:w-auto">
+      <main className="flex flex-row justify-center items-center mt-44 max-[1350px]:mt-6 w-full max-[1350px]:w-full">
+        <div className="flex w-[1350px] max-[1350px]:w-auto">
           <div className="flex flex-col lg:mx-15 md:mx-10 max-md:mx-5 items-center justify-center">
-            <div className="flex flex-row w-[1300px] max-[1300px]:w-full max-[1300px]:flex-col-reverse gap-5 items-center justify-center px-20 max-[1300px]:px-0">
+            <div className="flex flex-row w-[1350px] max-[1350px]:w-full max-[1350px]:flex-col-reverse gap-5 items-center justify-center px-20 max-[1350px]:px-0">
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 100, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex flex-col h-full w-full justify-center max-[1300px]:items-center">
+                className="flex flex-col h-full w-full justify-center max-[1350px]:items-center">
                 <span className="font-bold md:text-2xl text-xl text-gray-700">HELLO I'M</span>
                 <span className="font-bold md:text-6xl text-3xl tracking-[-0.05em]">PHUMRAPEE</span>
                 <span className="font-bold md:text-6xl text-3xl tracking-[-0.05em]">SOENVANICHAKUL</span>
@@ -50,7 +50,7 @@ export default function Home() {
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 100, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex w-full justify-end max-[1300px]:justify-center">
+                className="flex w-full justify-end max-[1350px]:justify-center">
                 <Image onClick={() => {
                   const el = document.getElementById("profile-phum");
                   if (el!.classList.contains("image-popup")) {
