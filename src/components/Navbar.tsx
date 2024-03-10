@@ -20,18 +20,20 @@ export const Navbar = () => {
                 position="bottom-right"
                 reverseOrder={false}
             />
-            <nav className="flex  justify-center">
-                <div className="flex items-center w-[1400px] justify-between p-5 pb-3 md:mx-10 border-b border-gray-300">
-                    <span className="font-bold text-2xl tracking-tight">Portfolio</span>
-                    <motion.button
-                    onClick={() => buttonHandler("download-cv")}
-                    whileHover={{ scale: 1.05 }}
-                    className="flex space-x-2 items-center p-2 rounded-full border-black border">
-                        <Icon icon="material-symbols-light:download" />
-                        <span className="text-sm">Download CV</span>
-                    </motion.button>
-                </div>
-            </nav>
+            <div className="flex justify-center ">
+                <nav className="container flex justify-center">
+                    <div className="container flex items-center justify-between p-5 pb-3 border-b border-gray-300">
+                        <span className="font-bold text-2xl tracking-tight">Portfolio</span>
+                        <motion.button
+                        onClick={() => buttonHandler("download-cv")}
+                        whileHover={{ scale: 1.05 }}
+                        className="flex space-x-2 items-center p-2 rounded-full border-black border">
+                            <Icon icon="material-symbols-light:download" />
+                            <span className="text-sm">Download CV</span>
+                        </motion.button>
+                    </div>
+                </nav>
+            </div>
         </>
     )
 }
