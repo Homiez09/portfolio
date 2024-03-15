@@ -45,12 +45,12 @@ export default function Home() {
                   <a href="https://www.facebook.com/phumrapee.soenvanichakul.3/" target="_blank"><Icon icon="bi:facebook" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
                 </div>
               </motion.div>
-
+              
               <motion.div
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 100, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex w-full justify-end max-[1350px]:justify-center">
+                className="flex w-2/3 justify-end max-[1350px]:justify-center">
                 <Image onClick={() => {
                   const el = document.getElementById("profile-phum");
                   if (el!.classList.contains("image-popup")) {
