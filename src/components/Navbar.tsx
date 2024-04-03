@@ -17,22 +17,20 @@ export const Navbar = () => {
     return (
         <>
             <Toaster
-                position="bottom-right"
+                position="top-center"
                 reverseOrder={false}
             />
-            <div className="flex justify-center ">
-                <nav className="container flex justify-center">
-                    <div className="container flex items-center justify-between p-5 pb-3 border-b border-gray-300">
-                        <span className="font-bold text-2xl tracking-tight">Portfolio</span>
-                        <motion.button
+            <div className='flex justify-center'>
+                <div className="flex container justify-between border-b border-gray-300 p-5 pb-3">
+                    <span className="flex font-bold text-2xl tracking-tight">Portfolio</span>
+                    <motion.button
                         onClick={() => buttonHandler("download-cv")}
                         whileHover={{ scale: 1.05 }}
                         className="flex space-x-2 items-center p-2 rounded-full border-black border">
-                            <Icon icon="material-symbols-light:download" />
-                            <span className="text-sm">Download CV</span>
-                        </motion.button>
-                    </div>
-                </nav>
+                        <Icon icon="material-symbols-light:download" />
+                        <span className="text-sm">Download CV</span>
+                    </motion.button>
+                </div>
             </div>
         </>
     )
