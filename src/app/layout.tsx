@@ -16,12 +16,12 @@ export const metadata = {
     url: 'https:phumrapee.me',
     images: [
       {
-        url: 'https://drive.google.com/uc?export=view&id=1LWni2W7QnSY_Nqt5O3Qjz-R18Oq8t6xf',
+        url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
         width: 800,
         height: 600,
       },
       {
-        url: 'https://drive.google.com/uc?export=view&id=1LWni2W7QnSY_Nqt5O3Qjz-R18Oq8t6xf',
+        url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
         width: 1800,
         height: 1600,
         alt: 'Phumrapee Soenvanichakul (HomieZ09)',
