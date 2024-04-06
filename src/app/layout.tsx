@@ -7,6 +7,22 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'Phumrapee Soenvanichakul',
+  description: `I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
+  I'm a student at Kasetsart University, majoring in Computer Science.
+  I'm interested in web-app development, game development, and data science.`,
+  images: [
+    {
+      url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
+      width: 800,
+      height: 600,
+    },
+    {
+      url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
+      width: 1800,
+      height: 1600,
+      alt: 'Phumrapee Soenvanichakul (HomieZ09)',
+    },
+  ],
   openGraph: {
     title: 'Phumrapee Soenvanichakul',
     description: `
