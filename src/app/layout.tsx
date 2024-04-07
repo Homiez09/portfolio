@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react"
-import { Navbar } from "@/components/Navbar";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
+import { Webring } from "@/components/Webring";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,8 +56,9 @@ export default function RootLayout({
     <html lang="en">
       <Analytics />
       <body className={inter.className}>
+        <Webring />
         <Navbar />
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center">
           <div className="container px-5">
             {children}
           </div>

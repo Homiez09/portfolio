@@ -15,9 +15,9 @@ export default () => {
   }
   return (
     <>
-      <div className="flex max-lg:w-auto pb-20 h-[90vh]">
-        <div className="flex flex-col w-full mx-5 items-center justify-center">
-          <div className="flex flex-row w-full max-lg:flex-col gap-5 items-center justify-center  max-lg:px-0">
+      <div className="flex flex-col justify-center max-lg:w-auto h-screen">  
+        <div className="flex flex-col w-full items-center justify-center">
+          <div className="flex flex-row w-full max-lg:flex-col gap-5 items-center justify-center">
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 100, x: 0 }}
