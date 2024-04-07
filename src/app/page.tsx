@@ -18,11 +18,7 @@ export default () => {
       <div className="flex flex-col justify-center max-lg:w-auto h-screen">  
         <div className="flex flex-col w-full items-center justify-center">
           <div className="flex flex-row w-full max-lg:flex-col gap-5 items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 100, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex w-full justify-center">
+            <div className="flex w-full justify-center">
               <Image
                 id="profile-phum"
                 className="drop-shadow-md object-cover"
@@ -31,13 +27,9 @@ export default () => {
                 width={288}
                 height={288}
               />
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              animate={{ opacity: 100, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col w-full justify-center max-lg:items-center">
+            <div className="flex flex-col w-full justify-center max-lg:items-center">
               <span className="font-bold lg:text-2xl text-xl text-gray-700">HELLO I'M</span>
               <span className="font-bold lg:text-6xl text-3xl tracking-[-0.05em]">PHUMRAPEE</span>
               <span className="font-bold lg:text-6xl text-3xl tracking-[-0.05em]">SOENVANICHAKUL</span>
@@ -56,7 +48,7 @@ export default () => {
                 <a href="https://www.instagram.com/prpswa_/" target="_blank"><Icon icon="bi:instagram" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
                 <a href="https://www.facebook.com/phumrapee.soenvanichakul.3/" target="_blank"><Icon icon="bi:facebook" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

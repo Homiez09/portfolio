@@ -6,7 +6,7 @@ export const Webring = () => {
     return (
         <div className="flex justify-center">
             <div className="fixed container h-screen">
-                <div className="absolute bottom-0 end-0 pb-3">
+                <div className="absolute bottom-0 end-0 p-5">
                     <Image 
                     alt="วงแหวนเว็บ"
                     width="32"
