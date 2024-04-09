@@ -4,8 +4,10 @@ import { Icon } from '@iconify/react';
 import { motion } from "framer-motion";
 import { saveAs } from 'file-saver';
 import { Toaster, toast } from 'react-hot-toast';
+import { useRouter, usePathname } from 'next/navigation';
 
 export const Navbar = () => {
+    const router = useRouter();
     const buttonHandler = (path: string) => {
         switch (path) {
             case "download-cv":
@@ -16,13 +18,9 @@ export const Navbar = () => {
     }
     return (
         <>
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-            />
             <div className='flex justify-center'>
-                <div className="flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 absolute">
-                    <span className="flex font-bold text-2xl tracking-tight">Portfolio</span>
+                <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 ${(usePathname() === "/") ? 'absolute' : ''}`}>
+                    <span className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" onClick={() => router.push('/')}>Portfolio</span>
 
                     <motion.button
                         onClick={() => buttonHandler("download-cv")}

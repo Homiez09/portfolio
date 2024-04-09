@@ -3,7 +3,9 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Webring } from "@/components/Webring";
+import { Toaster } from 'react-hot-toast';
 
+import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -56,6 +58,10 @@ export default function RootLayout({
     <html lang="en">
       <Analytics />
       <body className={inter.className}>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+        />
         <Webring />
         <Navbar />
         <div className="flex justify-center">

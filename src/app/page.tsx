@@ -1,11 +1,14 @@
 'use client';
 
-import { Icon } from '@iconify/react';
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Typewriter from 'typewriter-effect';
+import { Icon } from '@iconify/react';
+import { useRouter } from "next/navigation";
+import { Button } from 'antd';
 
 export default () => {
+  const router = useRouter();
+  
   const iconStyle = {
     height: "25",
     width: "25",
@@ -15,7 +18,7 @@ export default () => {
   }
   return (
     <>
-      <div className="flex flex-col justify-center max-lg:w-auto h-screen">  
+      <div className="flex flex-col justify-center max-lg:w-auto h-screen">
         <div className="flex flex-col w-full items-center justify-center">
           <div className="flex flex-row w-full max-lg:flex-col gap-5 items-center justify-center">
             <div className="flex w-full justify-center">
@@ -42,12 +45,13 @@ export default () => {
                     .start();
                 }} />
               </span>
-
-              <div className="mt-5 flex flex-row max-lg:justify-center h-10 w-full gap-4">
+              <div className="mt-5 flex flex-row max-lg:justify-center items-center h-10 w-full gap-4">
                 <a href="https://github.com/Homiez09" target="_blank"><Icon icon="bi:github" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
                 <a href="https://www.instagram.com/prpswa_/" target="_blank"><Icon icon="bi:instagram" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
                 <a href="https://www.facebook.com/phumrapee.soenvanichakul.3/" target="_blank"><Icon icon="bi:facebook" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
+                <Button type="default" shape="default" size="large" className=' w-fit' onClick={() => router.push("/project")}>Project</Button>
               </div>
+
             </div>
           </div>
         </div>
