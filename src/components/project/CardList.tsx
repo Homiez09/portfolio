@@ -3,8 +3,9 @@
 import { FC } from 'react';
 import { Card } from './Card';
 import { projects } from '@/libs/hardCodeData';
+import { CardListProps } from '@/types/CardListProps';
 
-export const CardList: FC<{ query: string }> = ({ query }) => {
+export const CardList: FC<CardListProps> = ({ query }) => {
     return (
         <>
             <div className="flex flex-col gap-5 justify-center w-full">

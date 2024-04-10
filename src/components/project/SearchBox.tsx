@@ -31,7 +31,6 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
                 className="w-1/2 max-lg:w-full rounded-full border focus-within:shadow-lg"
                 onChange={(e) => updateQuery(e)}
                 value={searchTerm}
-                // variant="bordered"
                 placeholder="Type to search..."
                 onClear={() => updateQuery()}
                 startContent={

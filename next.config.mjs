@@ -19,9 +19,9 @@ const nextConfig = {
             }
         ],
     },
-    // experimental: {
-    //     missingSuspenseWithCSRBailout: false,
-    // },
+    experimental: {
+        missingSuspenseWithCSRBailout: true,
+    },
 };
 
 export default nextConfig;
