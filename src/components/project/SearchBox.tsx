@@ -11,7 +11,7 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
 
     useEffect(() => {
         setSearchTerm(query);
-    }, [])
+    }, [query])
 
     const updateQuery = (e?: ChangeEvent<HTMLInputElement>) => {
         if (e) {
@@ -32,7 +32,7 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
                 onChange={(e) => updateQuery(e)}
                 value={searchTerm}
                 placeholder="Type to search..."
-                onClear={() => updateQuery()}
+                onClear={() => {updateQuery()}}
                 startContent={
                     <Icon icon="material-symbols:search" width={20} height={20} className="text-black/50 mb-0.5" />
                 }

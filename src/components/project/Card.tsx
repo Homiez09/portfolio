@@ -12,8 +12,8 @@ export const Card = ({ props }: any) => {
     let title = document.querySelector(`#title${props.id}`);
     let content = document.querySelector(`#content${props.id}`);
 
-    title!.innerHTML = props.title.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-    content!.innerHTML = props.detail.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    content!.innerHTML = props.detail.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
 
   }, [query])
 
@@ -45,8 +45,16 @@ export const Card = ({ props }: any) => {
         </div>
         <div className="px-2">
           {/* Categorys */}
-          {props.categorys.map((category: string, key:any) => (
-            <Tag key={key} bordered={true} color={category.toLowerCase().includes(query?.toLowerCase() || "$tag")? "success" : "processing"} className="hover:cursor-pointer">{category}</Tag>
+          {props.categorys.map((category: string, key: any) => (
+            <Tag
+              key={key}
+              bordered={true}
+              color={category.toLowerCase().includes(query?.toLowerCase() || "$tag") ? "success" : "processing"}
+              className="hover:cursor-pointer hover:text-black"
+              onClick={() => router.push(`?query=${category}`)}
+            >
+              {category}
+            </Tag>
           ))}
         </div>
       </div>
