@@ -1,5 +1,5 @@
 import { ibmbold } from "@/libs/font";
-import { projects } from "@/app/project/hardcodedata";
+import { projects } from "@/libs/hardCodeData"
 import Image from "next/image";
 import { Tag } from 'antd';
 import Link from "next/link";

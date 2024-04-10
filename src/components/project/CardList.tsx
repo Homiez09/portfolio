@@ -1,6 +1,6 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Card } from './Card';
-import { projects } from '@/app/project/hardcodedata';
+import { projects } from '@/libs/hardCodeData';
 import { useSearchParams } from 'next/navigation';
 
 export const CardList: FC<{}> = () => {

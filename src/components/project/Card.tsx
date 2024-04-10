@@ -9,8 +9,12 @@ export const Card = ({ props }: any) => {
   const query = useSearchParams().get("query");
 
   useEffect(() => {
-    let el = document.querySelector(`#content${props.id}`);
-    el!.innerHTML = props.detail.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    let title = document.querySelector(`#title${props.id}`);
+    let content = document.querySelector(`#content${props.id}`);
+
+    title!.innerHTML = props.title.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    content!.innerHTML = props.detail.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+
   }, [query])
 
   return (
@@ -21,7 +25,7 @@ export const Card = ({ props }: any) => {
             {/* Date */}
             <small className="text-gray-500">{props.createAt}</small>
             {/* Title */}
-            <p className={`text-xl ${ibmbold.className}`}>{props.title}</p>
+            <div id={`title${props.id}`} className={`text-xl ${ibmbold.className}`}>{props.title}</div>
             <div className="w-full items-center gap-3 block">
               {/* Detail */}
               <div id={`content${props.id}`} className="text-ellipsis text-wrap overflow-hidden">
@@ -42,7 +46,7 @@ export const Card = ({ props }: any) => {
         <div className="px-2">
           {/* Categorys */}
           {props.categorys.map((category: string, key:any) => (
-            <Tag key={key} bordered={false} color="processing" className="hover:cursor-pointer">{category}</Tag>
+            <Tag key={key} bordered={true} color={category.toLowerCase().includes(query?.toLowerCase() || "$tag")? "success" : "processing"} className="hover:cursor-pointer">{category}</Tag>
           ))}
         </div>
       </div>
