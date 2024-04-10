@@ -5,7 +5,6 @@ import { Navbar } from "@/components/Navbar";
 import { Webring } from "@/components/Webring";
 import { Toaster } from 'react-hot-toast';
 
-import { SessionProvider } from "next-auth/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

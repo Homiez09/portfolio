@@ -1,4 +1,3 @@
-"use client";
 import { ibm } from "@/libs/font";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

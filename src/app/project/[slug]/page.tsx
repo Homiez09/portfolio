@@ -10,7 +10,7 @@ export default ({ params }: { params: { slug: string } }) => {
     return (
         <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-end">
-                <a href="/project" className="hover:cursor-pointer">{'< back'}</a>
+                <Link href="/project" className="hover:cursor-pointer">{'< back'}</Link>
                 <small className="text-gray-500">{project!.createAt}</small>
             </div>
             <div className="relative w-full h-72">

@@ -51,7 +51,6 @@ export default () => {
                 <a href="https://www.facebook.com/phumrapee.soenvanichakul.3/" target="_blank"><Icon icon="bi:facebook" width={iconStyle.width} height={iconStyle.height} style={iconStyle.style} /></a>
                 <Button type="default" shape="default" size="large" className=' w-fit' onClick={() => router.push("/project")}>Project</Button>
               </div>
-
             </div>
           </div>
         </div>
