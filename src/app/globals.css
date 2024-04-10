@@ -14,3 +14,10 @@
     border-radius: 0;
     cursor: pointer;
 }
+
+.text-ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
