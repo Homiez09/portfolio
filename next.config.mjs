@@ -12,6 +12,11 @@ const nextConfig = {
                 hostname: 'webring.wonderful.software',
                 pathname: '**',
             },
+            {
+                protocol: 'https',
+                hostname: 'drive.google.com',
+                pathname: '**',
+            }
         ],
     }
 };
