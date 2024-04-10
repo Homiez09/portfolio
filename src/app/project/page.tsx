@@ -3,10 +3,10 @@
 import { CardList } from "@/components/project/CardList";
 import { ibmbold } from "@/libs/font";
 import { SearchBox } from "@/components/project/SearchBox";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 export default () => {
-    const query = useSearchParams().get("query") || "";
+    const query = "";
     return (
         <>
             <div className="flex flex-col items-center gap-14 max-lg:gap-5">
