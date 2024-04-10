@@ -1,7 +1,8 @@
+'use client';
+
 import { FC } from 'react';
 import { Card } from './Card';
 import { projects } from '@/libs/hardCodeData';
-import { useSearchParams } from 'next/navigation';
 
 export const CardList: FC<{ query: string }> = ({ query }) => {
     return (
