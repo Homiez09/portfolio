@@ -18,7 +18,10 @@ const nextConfig = {
                 pathname: '**',
             }
         ],
-    }
+    },
+    experimental: {
+        missingSuspenseWithCSRBailout: true,
+    },
 };
 
 export default nextConfig;
