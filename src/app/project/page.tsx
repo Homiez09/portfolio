@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 
 export default () => {
 
-    const query = useSearchParams().has("query") ? useSearchParams().get("query") || "" : "";
+    const query = useSearchParams().get("query") || "";
     return (
         <>
             <div className="flex flex-col items-center gap-14 max-lg:gap-5">
