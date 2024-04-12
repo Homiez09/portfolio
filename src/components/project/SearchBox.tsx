@@ -11,7 +11,7 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
 
     useEffect(() => {
         setSearchTerm(query);
-    }, [])
+    }, [query])
 
     const updateQuery = (e?: ChangeEvent<HTMLInputElement>) => {
         if (e) {

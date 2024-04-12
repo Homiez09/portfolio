@@ -3,6 +3,7 @@ import { ibmbold } from '@/libs/font';
 import { Tag } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { CategoryList } from './CategoryList';
 
 export const Card = ({ props }: any) => {
   const router = useRouter();
@@ -10,16 +11,16 @@ export const Card = ({ props }: any) => {
 
   useEffect(() => {
     let title = document.querySelector(`#title${props.id}`);
-    let content = document.querySelector(`#content${props.id}`);
+    let description = document.querySelector(`#description${props.id}`);
 
-    title!.innerHTML = props.title.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-    content!.innerHTML = props.detail.replace(new RegExp( query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+    description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
 
   }, [query])
 
   return (
     <>
-      <div className="w-full pb-5 lg:px-5 border-b">
+      <div className="w-full pb-5 lg:px-5 border-b select-none hover:scale-[1.02]">
         <div className="flex flex-row p-2 hover:cursor-pointer" onClick={() => router.push(`project/${props.id}`)}>
           <div className="flex flex-col w-2/3">
             {/* Date */}
@@ -27,9 +28,9 @@ export const Card = ({ props }: any) => {
             {/* Title */}
             <div id={`title${props.id}`} className={`text-xl ${ibmbold.className}`}>{props.title}</div>
             <div className="w-full items-center gap-3 block">
-              {/* Detail */}
-              <div id={`content${props.id}`} className="text-ellipsis text-wrap overflow-hidden">
-                {props.detail}
+              {/* Description */}
+              <div id={`description${props.id}`} className="text-ellipsis text-wrap overflow-hidden">
+                {props.description}
               </div>
             </div>
           </div>
@@ -45,9 +46,7 @@ export const Card = ({ props }: any) => {
         </div>
         <div className="px-2">
           {/* Categorys */}
-          {props.categorys.map((category: string, key:any) => (
-            <Tag key={key} bordered={true} color={category.toLowerCase().includes(query?.toLowerCase() || "$tag")? "success" : "processing"} className="hover:cursor-pointer">{category}</Tag>
-          ))}
+          <CategoryList categorys={props.categorys} />
         </div>
       </div>
     </>
