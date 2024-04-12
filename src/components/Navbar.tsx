@@ -3,7 +3,7 @@
 import { Icon } from '@iconify/react';
 import { motion } from "framer-motion";
 import { saveAs } from 'file-saver';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useRouter, usePathname } from 'next/navigation';
 
 export const Navbar = () => {

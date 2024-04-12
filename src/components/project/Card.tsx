@@ -19,7 +19,7 @@ export const Card = ({ props }: any) => {
 
   return (
     <>
-      <div className="w-full pb-5 lg:px-5 border-b">
+      <div className="w-full pb-5 lg:px-5 border-b select-none hover:scale-[1.02]">
         <div className="flex flex-row p-2 hover:cursor-pointer" onClick={() => router.push(`project/${props.id}`)}>
           <div className="flex flex-col w-2/3">
             {/* Date */}
