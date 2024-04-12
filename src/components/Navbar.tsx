@@ -11,7 +11,7 @@ export const Navbar = () => {
     const buttonHandler = (path: string) => {
         switch (path) {
             case "download-cv":
-                saveAs("https://export-download.canva.com/od_90/DAF1djod_90/39/0-8095644753839204858.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHKNGJLC2J7OGJ6Q%2F20240410%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240410T032358Z&X-Amz-Expires=28217&X-Amz-Signature=ef353bd59769f5ceea10f31c18af5766299f764e9005a94759a2a8c0ab855d9c&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%2A%3DUTF-8%27%27Phumrapee%2520soenvanichakul.pdf&response-expires=Wed%2C%2010%20Apr%202024%2011%3A14%3A15%20GMT", "RESUME_Phumrapee_Soenvanichakul.pdf");
+                saveAs("https://export-download.canva.com/od_90/DAF1djod_90/39/0-8620314322965639075.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJHKNGJLC2J7OGJ6Q%2F20240412%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240412T121027Z&X-Amz-Expires=7174&X-Amz-Signature=6136d96b5a40b9119422945a3d2c454a494ca5bba66c594a8f8a7ed74230149d&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%2A%3DUTF-8%27%27Phumrapee%2520soenvanichakul.pdf&response-expires=Fri%2C%2012%20Apr%202024%2014%3A10%3A01%20GMT", "RESUME_Phumrapee_Soenvanichakul.pdf");
                 toast.success('Successfully toasted!');
                 break;
         }
