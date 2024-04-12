@@ -20,4 +20,44 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
-  }
+}
+
+#markdown {
+    font-size: 1rem;
+    line-height: 2.5;
+    color: var(--textColor-primary, var(--color-text-primary));
+}
+
+#markdown a {
+    color: #0070f3;
+}
+
+#markdown a:hover {
+    text-decoration: underline;
+}
+
+#markdown h1 {
+    font-size: 2rem;
+}
+
+#markdown h2 {
+    font-size: 1.5rem;
+}
+
+#markdown h3 {
+    font-size: 1.25rem;
+}
+
+#markdown img {
+    padding-bottom: 1.5rem;
+}
+
+#markdown code {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    color: #fff;
+    white-space: break-spaces;
+    background-color: #6e7072;
+    border-radius: 6px;
+}

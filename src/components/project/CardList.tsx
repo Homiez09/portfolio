@@ -12,7 +12,7 @@ export const CardList: FC<CardListProps> = ({ query }) => {
                 {projects.filter((project) => {
                     if (query) {
                         return project.title.toLowerCase().includes(query.toLowerCase()) ||
-                            project.detail.toLowerCase().includes(query.toLowerCase()) ||
+                            project.content.toLowerCase().includes(query.toLowerCase()) ||
                             project.categorys.some((cat) => cat.toLowerCase().includes(query.toLowerCase()));
                     }
                     return true;
