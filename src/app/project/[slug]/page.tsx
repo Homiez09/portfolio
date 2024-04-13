@@ -1,12 +1,10 @@
-import { ibmbold } from "@/libs/font";
-import { projects } from "@/libs/hardCodeData"
 import Image from "next/image";
 import Link from "next/link";
-import { CategoryList } from "@/components/project/CategoryList";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import SyntaxHighlighter from "react-syntax-highlighter";
+import { ibmbold } from "@/libs/font";
+import { projects } from "@/libs/hardCodeData"
+import { CategoryList } from "@/components/project/CategoryList";
 
 export default async ({ params }: { params: { slug: string } }) => {
     const project = projects.find((project) => project.id === Number(params.slug));
@@ -36,27 +34,9 @@ export default async ({ params }: { params: { slug: string } }) => {
                     </div>
                 </div>
                 {/* Content */}
-                {/* <div className="flex flex-col leading-8 gap-3" dangerouslySetInnerHTML={{ __html: project!.content}} /> */}
-                <div id="markdown">
+                <div className="prose">
                     <ReactMarkdown
                         children={res.data}
-                        rehypePlugins={[rehypeRaw, () => {
-                            return (tree) => {
-                                tree.children = tree.children.map((node:any) => {
-                                    if (node.type === "element" && node.tagName === "pre") {
-                                        return (
-                                            <SyntaxHighlighter language={node.children[0].properties.className[0].split("-")[1]} style={undefined}>
-                                                {node.children[0].children[0].value}
-                                            </SyntaxHighlighter>
-                                        );
-                                    }
-                                    return node;
-                                });
-                                return tree;
-                            };
-                        }
-                        ]
-                    }
                     />
                 </div>
                 <Link href={project!.link} className="w-auto text-blue-400 hover:text-blue-500">@{project!.link}</Link>
