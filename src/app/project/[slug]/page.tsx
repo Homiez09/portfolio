@@ -12,20 +12,21 @@ import { timeFormat } from "@/libs/timeFormat";
 
 export default async ({ params }: { params: { slug: string } }) => {
     const [project, setProject] = useState<Project | null>(null);
+    const [error, setError] = useState<boolean | null>(null);
 
     const fetchProject = async () => {
         await axios.get(`/api/contents/${params.slug}`).then((res) => {
             console.log(res.data.data);
             setProject(res.data.data);
-        });
+        }).catch((err) => setError(true));
     }
 
     useEffect(() => {
         fetchProject();
     }, [])
 
-    if (!project) return <div className="text-center">Not Found</div>;
-
+    if (!project && !error) return <div className="text-center">Loading...</div>;
+    if (error) return <div className="text-center">Not Found</div>;
     return (
         <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-end">
