@@ -1,17 +1,19 @@
-import { Inter } from "next/font/google";
+import { Kanit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Webring } from "@/components/Webring";
 import { Toaster } from 'react-hot-toast';
+import Footer from "@/components/Footer";
+import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
 
-const inter = Inter({ subsets: ["latin"] });
+const kanit = Kanit({ subsets: ["latin"], weight: ["300", "700"] });
 
 export const metadata = {
   title: 'Phumrapee Soenvanichakul',
   description: `I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
   I'm a student at Kasetsart University, majoring in Computer Science.
-  I'm interested in web-app development, game development, and data science.`,
+  I'm interested in software engineering, full-stack`,
   images: [
     {
       url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
@@ -30,7 +32,7 @@ export const metadata = {
     description: `
     I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
     I'm a student at Kasetsart University, majoring in Computer Science.
-    I'm interested in web-app development, game development, and data science.`,
+    I'm interested in software engineering, full-stack`,
     url: 'https:phumrapee.me',
     images: [
       {
@@ -56,18 +58,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Analytics />
-      <body className={inter.className}>
+      <body className={kanit.className}>
         <Toaster
           position="top-center"
           reverseOrder={false}
         />
         <Webring />
         <Navbar />
-        <div className="flex justify-center">
-          <div className="container px-5">
+        <div className="container px-5">
+          <AntdStyledComponentsRegistry>
             {children}
-          </div>
+          </AntdStyledComponentsRegistry>
         </div>
+        <Footer />
       </body>
     </html>
   );

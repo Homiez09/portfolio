@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { Input } from "@nextui-org/react";
-import { Icon } from "@iconify/react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
 
 export const SearchBox: FC<{query: string}> = ({ query }) => {
