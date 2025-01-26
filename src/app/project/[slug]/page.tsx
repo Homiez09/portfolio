@@ -8,6 +8,7 @@ import { ibmbold } from "@/libs/font";
 import { CategoryList } from "@/components/project/CategoryList";
 import { Project } from "@/types/TypeProject";
 import { useEffect, useState } from "react";
+import { timeFormat } from "@/libs/timeFormat";
 
 export default async ({ params }: { params: { slug: string } }) => {
     const [project, setProject] = useState<Project | null>(null);
@@ -30,7 +31,7 @@ export default async ({ params }: { params: { slug: string } }) => {
             <div className="flex flex-row justify-between items-end">
                 <Link href="/project" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
                 {/* Date */}
-                <small className="text-gray-500">{project!.createdAt}</small>
+                <small className="text-gray-500">{timeFormat(project!.createdAt)}</small>
             </div>
             <div className="relative w-full h-72">
                 <Image
