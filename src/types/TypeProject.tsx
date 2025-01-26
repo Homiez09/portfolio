@@ -1,4 +1,4 @@
-import { Tag } from "./TypeTag";
+import { ITag } from "./TypeTag";
 
 export type Project = {
     id: number;
@@ -9,7 +9,7 @@ export type Project = {
     updatedAt: string;
     publishedAt: string;
     content: string;
-    tags: Tag[];
+    tags: ITag[];
     banner: any;
     date: string | null; // ในอนาคตจะลบออก
 }
