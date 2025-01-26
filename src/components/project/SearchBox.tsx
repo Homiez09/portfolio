@@ -5,7 +5,7 @@ import { Input } from "@nextui-org/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useRouter } from "next/navigation";
 
-export const SearchBox: FC<{query: string}> = ({ query }) => {
+export const SearchBox: FC<{ query: string }> = ({ query }) => {
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -13,15 +13,15 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
         setSearchTerm(query);
     }, [query])
 
+
     const updateQuery = (e?: ChangeEvent<HTMLInputElement>) => {
-        if (e) {
-            if (e?.target.value === "") router.push("/project");
-            else router.push(`?query=${e!.target.value}`);
-            setSearchTerm(e!.target.value);
-        } else {
-            router.push("/project");
-            setSearchTerm("");
-        }
+        if (e?.target.value === "") router.push("/project");
+        else router.push(`?query=${e!.target.value}`);
+        setSearchTerm(e!.target.value);
+    }
+
+    const clearQuery = () => {
+        router.push("/");
     }
 
     return (
@@ -32,7 +32,7 @@ export const SearchBox: FC<{query: string}> = ({ query }) => {
                 onChange={(e) => updateQuery(e)}
                 value={searchTerm}
                 placeholder="Type to search..."
-                onClear={() => updateQuery()}
+                onClear={() => clearQuery()}
                 startContent={
                     <Icon icon="material-symbols:search" width={20} height={20} className="text-black/50 mb-0.5" />
                 }
