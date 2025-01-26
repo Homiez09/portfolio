@@ -50,7 +50,7 @@ export default async ({ params }: { params: { slug: string } }) => {
                 </div>
             </div>
             {/* Content */}
-            <div className="prose">
+            <div className="prose self-center">
                 <ReactMarkdown
                     children={project!.content}
                 />
