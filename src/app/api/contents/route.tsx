@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function POST() {
 	try {
 		const res = await axios.get(`${process.env.BACKEND_URI}/api/project-contents?populate=*`, {
 			headers: {

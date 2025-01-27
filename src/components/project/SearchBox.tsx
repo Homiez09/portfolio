@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { Input } from "@nextui-org/react";

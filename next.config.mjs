@@ -24,9 +24,6 @@ const nextConfig = {
             }
         ],
     },
-    experimental: {
-        missingSuspenseWithCSRBailout: true,
-    },
 };
 
 export default nextConfig;

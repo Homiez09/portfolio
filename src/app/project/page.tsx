@@ -6,7 +6,6 @@ import { SearchBox } from "@/components/project/SearchBox";
 import { useSearchParams } from "next/navigation";
 
 export default () => {
-
     const query = useSearchParams().get("query") || "";
     return (
         <>

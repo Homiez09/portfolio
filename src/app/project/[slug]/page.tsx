@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,10 +15,7 @@ export default async ({ params }: { params: { slug: string } }) => {
     const [error, setError] = useState<boolean | null>(null);
 
     const fetchProject = async () => {
-        await axios.get(`/api/contents/${params.slug}`).then((res) => {
-            console.log(res.data.data);
-            setProject(res.data.data);
-        }).catch((err) => setError(true));
+        await axios.post(`/api/contents/${params.slug}`).then((res) => setProject(res.data.data)).catch((err) => setError(true));
     }
 
     useEffect(() => {

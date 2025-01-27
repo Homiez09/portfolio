@@ -10,12 +10,11 @@ export const CardList: FC<CardListProps> = ({ query }) => {
     const [projects, setProjects] = useState<Project[]>([]);
 
     const fetchProjects = async () => {
-        await axios.get(`/api/contents`).then((res) => {console.log(res.data.data);setProjects(res.data.data)});
+        await axios.post(`/api/contents`).then((res) => { setProjects(res.data.data) });
     }
 
     useEffect(() => {
         fetchProjects();
-        console.log(projects);
     }, []);
 
     if (!projects) {
@@ -37,4 +36,16 @@ export const CardList: FC<CardListProps> = ({ query }) => {
             </div>
         </>
     );
+}
+
+export async function getStaticProps() {
+    const res = await fetch('https://.../api/contents');
+    const data = await res.json();
+
+    return {
+        props: {
+            projects: data.data,
+        },
+        revalidate: 60, // Revalidate every 60 seconds
+    };
 }
