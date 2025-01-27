@@ -40,7 +40,7 @@ export const Navbar = () => {
                     onClick={() => buttonHandler("download-resume")}
                     whileHover={{ scale: 1.05 }}
                     className={`flex space-x-2 items-center p-2 rounded-full border-black border ${resumeURI ? 'hover:cursor-pointer' : 'cursor-not-allowed opacity-35'}`}>
-                    <Icon ssr icon="material-symbols-light:download" />
+                    {resumeURI ? <Icon ssr icon="material-symbols-light:download" /> : <Icon ssr icon="svg-spinners:270-ring" />}
                     <span className="text-sm">Download Resume</span>
                 </motion.button>
             </div>
