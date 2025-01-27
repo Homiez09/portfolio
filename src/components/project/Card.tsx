@@ -1,6 +1,7 @@
+'use client';
+
 import Image from 'next/image';
 import { ibmbold } from '@/libs/font';
-import { Tag } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { CategoryList } from './CategoryList';
@@ -16,8 +17,6 @@ export const Card = ({ props, highlight }: any) => {
 
     title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
     description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-    console.log("query", query);
-
   }, [query])
 
   return (

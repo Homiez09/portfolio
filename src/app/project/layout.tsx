@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { ibm } from "@/libs/font";
 import { Suspense } from "react";

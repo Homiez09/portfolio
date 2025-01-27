@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { CardList } from "../project/CardList";
 import { SearchBox } from "../project/SearchBox";
@@ -12,15 +12,7 @@ export default function Project() {
             <p className="text-4xl font-bold text-gray-700">
                 PROJECTS
             </p>
-                <CardList query={query} />
-            {/* <div className="flex flex-col items-center gap-14">
-                <div className="flex flex-col items-center w-full">
-                    <SearchBox query={query} />
-                </div>
-                <div className="flex flex-row max-lg:flex-col-reverse justify-center">
-                    <CardList query={query} />
-                </div>
-            </div> */}
+            <CardList query={query} />
         </div>
     );
 }

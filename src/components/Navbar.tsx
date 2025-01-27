@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
@@ -13,10 +13,7 @@ export const Navbar = () => {
     const [resumeURI, setResumeURI] = useState<string>("");
 
     const fetchResume = async () => {
-        await axios.get("/api/resume").then((res) => {
-            console.log(res.data)
-            setResumeURI(res.data.uri);
-        }).catch((err) => console.log(err));
+        await axios.post("/api/resume").then((res) => setResumeURI(res.data.uri)).catch((err) => console.log(err));
     }
 
     useEffect(() => {
@@ -36,7 +33,6 @@ export const Navbar = () => {
     }
     return (
         <>
-            {/* ${(usePathname() === "/") ? 'absolute' : ''} */}
             <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 left-0 right-0 bg-white ${(usePathname() === "/") ? 'absolute z-[999]' : ''}`}>
                 <span className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" onClick={() => router.push('/')}>Portfolio</span>
                 <motion.button
