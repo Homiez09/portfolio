@@ -21,7 +21,7 @@ export const SearchBox: FC<{ query: string }> = ({ query }) => {
     }
 
     const clearQuery = () => {
-        router.push("/");
+        router.push("/project");
     }
 
     return (

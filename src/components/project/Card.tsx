@@ -40,12 +40,12 @@ export const Card = ({ props, highlight }: any) => {
           </div>
         </div>
         {/* Image */}
-        <div>
-          <div className="relative flex flex-col items-end w-[150px] h-[84px] ml-auto">
+        <div className="ml-auto">
+          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
             <Image
               src={props.banner.url}
               alt="Project"
-              className='rounded-md shadow-md'
+              className='object-contain'
               fill
             />
           </div>
