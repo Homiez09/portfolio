@@ -10,19 +10,24 @@ export const CategoryList: FC<{ categorys: ITag[] }> = ({ categorys }) => {
     const query = useSearchParams().get("query");
     const router = useRouter();
 
+    const onTagClick = (e: React.MouseEvent<HTMLSpanElement>, tag: ITag) => {
+        e.stopPropagation();
+        router.push(`/project?query=${tag.name}`);
+    }
+
     return (
         <>
             {categorys.map((category: ITag, key: any) => (
-            <Tag
-              key={key}
-              bordered={true}
-              color={category.name.toLowerCase().includes(query?.toLowerCase() || "$tag") ? "success" : "processing"}
-              className="hover:cursor-pointer hover:text-black"
-              onClick={() => router.push(`/project?query=${category.name}`)}
-            >
-              {category.name}
-            </Tag>
-          ))}
+                <Tag
+                    key={key}
+                    bordered={true}
+                    color={category.name.toLowerCase().includes(query?.toLowerCase() || "$tag") ? "success" : "processing"}
+                    className="hover:cursor-pointer hover:text-black"
+                    onClick={(e) => onTagClick(e, category)}
+                >
+                    {category.name}
+                </Tag>
+            ))}
         </>
     )
 }

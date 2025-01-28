@@ -10,9 +10,7 @@ export default () => {
   return (
     <div className="container space-y-20 max-w-5xl">
       <Index />
-      <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <Project />
-      </Suspense>
+      <Project />
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function Project() {
     const query = useSearchParams().get("query") || "";
 
     return (
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-8 max-w-3xl place-self-center">
             <p className="text-4xl font-bold text-gray-700">
                 PROJECTS
             </p>

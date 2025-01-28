@@ -8,7 +8,6 @@ import { CategoryList } from './CategoryList';
 
 export const Card = ({ props, highlight }: any) => {
   const router = useRouter();
-  // const query = useSearchParams().get("query");
   const query = highlight;
 
   useEffect(() => {
@@ -21,9 +20,9 @@ export const Card = ({ props, highlight }: any) => {
 
   return (
     <>
-      <div className="w-full pb-5 lg:px-5 border-b select-none hover:scale-[1.02]">
-        <div className="flex flex-row p-2 hover:cursor-pointer" onClick={() => router.push(`project/${props.documentId}`)}>
-          <div className="flex flex-col w-2/3">
+      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer"  onClick={() => router.push(`project/${props.documentId}`)}>
+        <div className="flex flex-col p-2">
+          <div className="flex flex-col">
             {/* Date */}
             <small className="text-gray-500">{props.createAt}</small>
             {/* Title */}
@@ -35,19 +34,21 @@ export const Card = ({ props, highlight }: any) => {
               </div>
             </div>
           </div>
-          {/* Image */}
-          <div className="flex flex-col items-end w-1/3 p-2">
+          {/* Categorys */}
+          <div className="pt-2">
+            <CategoryList categorys={props.tags} />
+          </div>
+        </div>
+        {/* Image */}
+        <div className="ml-auto">
+          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
             <Image
               src={props.banner.url}
               alt="Project"
-              className='rounded-md shadow-md'
-              width="112" height="112"
+              className='object-contain'
+              fill
             />
           </div>
-        </div>
-        <div className="px-2">
-          {/* Categorys */}
-          <CategoryList categorys={props.tags} />
         </div>
       </div>
     </>
