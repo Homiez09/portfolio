@@ -28,7 +28,7 @@ export const SearchBox: FC<{ query: string }> = ({ query }) => {
         <>
             <Input
                 radius="full"
-                className="w-1/2 max-lg:w-full rounded-full border focus-within:shadow-lg"
+                className="rounded-full border focus-within:shadow-lg"
                 onChange={(e) => updateQuery(e)}
                 value={searchTerm}
                 placeholder="Type to search..."
