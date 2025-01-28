@@ -14,6 +14,7 @@ export const Card = ({ props, highlight }: any) => {
     let title = document.querySelector(`#title${props.id}`);
     let description = document.querySelector(`#description${props.id}`);
 
+    if (query === "") return;
     title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
     description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
   }, [query])
