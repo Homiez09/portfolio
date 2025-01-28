@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Webring = () => {
     return (
-        <a className="fixed bottom-0 end-0 p-5 z-[999]" href="https://webring.wonderful.software/#/phumrapee.com">
+        <a className="fixed bottom-0 end-0 p-5 z-[999]" href="https://webring.wonderful.software/#phumrapee.com">
             <Image
                 alt="วงแหวนเว็บ"
                 width="32"
