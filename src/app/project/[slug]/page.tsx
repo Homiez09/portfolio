@@ -56,7 +56,7 @@ export default async ({ params }: { params: { slug: string } }) => {
     );
 }
 
-const ProjectSkeleton = () => {
+export const ProjectSkeleton = () => {
     return (
         <div className="flex flex-col gap-3 animate-pulse">
             <div className="flex flex-row justify-between items-end">
