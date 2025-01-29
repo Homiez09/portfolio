@@ -6,13 +6,13 @@ import { ibmbold } from "@/libs/font";
 import { CategoryList } from "@/components/project/CategoryList";
 import { Project } from "@/types/TypeProject";
 import { timeFormat } from "@/libs/timeFormat";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = {
     params: { slug: string }
 }
 
-export const generateMetadata = async ({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> => {
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
         const project: Project = response.data.data;
