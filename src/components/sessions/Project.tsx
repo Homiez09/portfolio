@@ -1,8 +1,6 @@
 'use client';
 
-import { ibm } from "@/libs/font";
 import { CardList } from "../project/CardList";
-import { SearchBox } from "../project/SearchBox";
 import { useSearchParams } from "next/navigation";
 
 export default function Project() {
