@@ -1,5 +1,3 @@
-'use client';
-
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
@@ -7,23 +5,47 @@ import ReactMarkdown from "react-markdown";
 import { ibmbold } from "@/libs/font";
 import { CategoryList } from "@/components/project/CategoryList";
 import { Project } from "@/types/TypeProject";
-import { useEffect, useState } from "react";
 import { timeFormat } from "@/libs/timeFormat";
+import { Metadata, ResolvingMetadata } from "next";
 
-export default async ({ params }: { params: { slug: string } }) => {
-    const [project, setProject] = useState<Project | null>(null);
-    const [error, setError] = useState<boolean | null>(null);
+type Props = {
+    params: { slug: string }
+}
 
-    const fetchProject = async () => {
-        await axios.post(`/api/contents/${params.slug}`).then((res) => setProject(res.data.data)).catch((err) => setError(true));
+export const generateMetadata = async ({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> => {
+    try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
+        const project: Project = response.data.data;
+
+        return {
+            title: project.title,
+            description: project.description,
+            openGraph: {
+                title: project.title,
+                description: project.description,
+                images: [
+                    {
+                        url: project.banner.url,
+                        alt: project.title,
+                    },
+                ],
+            },
+        };
+    } catch (error) {
+        return {
+            title: "Project Not Found",
+            description: "The project you are looking for does not exist.",
+        };
     }
+};
 
-    useEffect(() => {
-        fetchProject();
-    }, [])
 
-    if (!project && !error) return <ProjectSkeleton />;
-    if (error) return <div className="text-center">Not Found</div>;
+
+export default async function Page ({ params }: Props) {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`).then((res) => res).catch((err) => err.response);
+    const project: Project = response.data.data;
+
+    if (response.status === 400) return <div className="text-center">Not Found</div>;
     return (
         <div className="flex flex-col gap-3">
             <div className="flex flex-row justify-between items-end">
