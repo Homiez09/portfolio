@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PositionStat } from "@/components/PositionStat";
 import { Social } from "@/components/Social";
+import { Suspense } from "react";
 
 export default function Index() {
     return (
@@ -20,8 +21,10 @@ export default function Index() {
                 <span className="font-bold lg:text-2xl text-xl text-gray-700">HELLO I'M</span>
                 <span className="font-bold lg:text-5xl text-3xl">PHUMRAPEE</span>
                 <span className="font-bold lg:text-5xl text-3xl">SOENVANICHAKUL</span>
-                <PositionStat />
-                <Social />
+                <Suspense fallback={<span>Loading...</span>}>
+                    <PositionStat />
+                    <Social />
+                </Suspense>
             </div>
         </div>
     );

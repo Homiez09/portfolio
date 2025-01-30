@@ -2,11 +2,10 @@
 
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { motion } from "framer-motion";
-import { saveAs } from 'file-saver';
-import { toast } from 'react-hot-toast';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
 export const Navbar = () => {
     const router = useRouter();
@@ -19,7 +18,6 @@ export const Navbar = () => {
     useEffect(() => {
         fetchResume();
     }, [])
-
 
     const buttonHandler = (path: string) => {
         // switch (path) {
@@ -34,7 +32,7 @@ export const Navbar = () => {
     return (
         <>
             <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 left-0 right-0 bg-white ${(usePathname() === "/") ? 'absolute z-[999]' : ''}`}>
-                <span className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" onClick={() => router.push('/')}>Portfolio</span>
+                <Link className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" href="/">Portfolio</Link>
                 <motion.button
                     disabled={!resumeURI}
                     onClick={() => buttonHandler("download-resume")}

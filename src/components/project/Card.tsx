@@ -1,27 +1,25 @@
-'use client';
-
 import Image from 'next/image';
 import { ibmbold } from '@/libs/font';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+// import { useRouter } from 'next/navigation';
+// import { useEffect } from 'react';
 import { CategoryList } from './CategoryList';
+import Link from 'next/link';
 
 export const Card = ({ props, highlight }: any) => {
-  const router = useRouter();
   const query = highlight;
 
-  useEffect(() => {
-    let title = document.querySelector(`#title${props.id}`);
-    let description = document.querySelector(`#description${props.id}`);
+  // useEffect(() => {
+  //   let title = document.querySelector(`#title${props.id}`);
+  //   let description = document.querySelector(`#description${props.id}`);
 
-    if (query === "") return;
-    title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-    description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-  }, [query])
+  //   if (query === "") return;
+  //   title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+  //   description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+  // }, [query])
 
   return (
-    <>
-      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer"  onClick={() => router.push(`project/${props.documentId}`)}>
+    <Link href={`project/${props.documentId}`}>
+      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer"  /*onClick={() => router.push(`project/${props.documentId}`)}*/>
         <div className="flex flex-col p-2">
           <div className="flex flex-col">
             {/* Date */}
@@ -52,6 +50,6 @@ export const Card = ({ props, highlight }: any) => {
           </div>
         </div>
       </div>
-    </>
+    </Link>
   );
 }
