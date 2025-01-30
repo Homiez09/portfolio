@@ -1,16 +1,15 @@
+import { CardListSkeleton } from "@/components/project/CardList";
 import Index from "@/components/sessions/Index";
-import dynamic from 'next/dynamic';
+import Project from "@/components/sessions/Project";
 import { Suspense } from "react";
-
-const Project = dynamic(() => import('@/components/sessions/Project'), {
-  ssr: false,
-});
 
 export default () => {
   return (
-    <div className="container space-y-20 max-w-5xl">
+    <div className="container space-y-20">
       <Index />
-      <Project />
+      <Suspense>
+        <Project />
+      </Suspense>
     </div>
   );
 }

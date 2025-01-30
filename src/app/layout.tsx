@@ -6,7 +6,6 @@ import { Webring } from "@/components/Webring";
 import { Toaster } from 'react-hot-toast';
 import Footer from "@/components/Footer";
 import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
-import { Suspense } from "react";
 
 const kanit = Kanit({ subsets: ["latin"], weight: ["300", "700"] });
 

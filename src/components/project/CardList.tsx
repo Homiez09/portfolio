@@ -1,29 +1,28 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
-import { Card } from './Card';
-import { CardListProps } from '@/types/CardListProps';
+import { Card, CardSkeleton } from './Card';
 import { Project } from '@/types/TypeProject';
-import axios from 'axios';
 import { ibm } from '@/libs/font';
+import { useSearchParams } from 'next/navigation';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-export const CardList: FC<CardListProps> = ({ query }) => {
+export const CardList = () => {
     const [projects, setProjects] = useState<Project[] | null>(null);
-    const [error, setError] = useState<boolean>(false);
+    const query = useSearchParams().get("query") || "";
 
     const fetchProjects = async () => {
-        await axios.post(`/api/contents`).then((res) => {setError(false);setProjects(res.data.data)}).catch((err) => setError(true));
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents`).then((res) => res).catch((err) => err.response);
+        setProjects(response.data.data);
     }
 
     useEffect(() => {
         fetchProjects();
-        console.log(projects);
-    }, [error]);
+    }, []);
 
-    if (!projects) {
-        return <LoadCardListSkeleton />;
-    }
-    if (error) { return <p>Failed to fetch projects,  Please try again.</p>; }
+    if (!projects) return <CardListSkeleton />;
+    if (projects.length === 0) return <div>No projects found.</div>;
+
     return (
         <>
             <div className={`flex flex-col gap-5 justify-center w-full ${ibm.className}`}>
@@ -42,21 +41,12 @@ export const CardList: FC<CardListProps> = ({ query }) => {
     );
 }
 
-const LoadCardListSkeleton = () => {
+export const CardListSkeleton = () => {
     return (
-        <div className="flex flex-col gap-5 justify-center w-full">
-            {Array.from({ length: 5 }).map((_, index) => (
-                <div key={index} className="animate-pulse flex space-x-4">
-                    <div className="rounded-full bg-gray-300 h-12 w-12"></div>
-                    <div className="flex-1 space-y-4 py-1">
-                        <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-                        <div className="space-y-2">
-                            <div className="h-4 bg-gray-300 rounded"></div>
-                            <div className="h-4 bg-gray-300 rounded w-5/6"></div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
+        <>
+            <div className={`flex flex-col gap-5 justify-center w-full ${ibm.className}`}>
+                {[0, 0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
+            </div>
+        </>
+    )
 }

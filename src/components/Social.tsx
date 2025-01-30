@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import 'iconify-icon';
 
 export const Social = () => {
     const iconStyle = {
