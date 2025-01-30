@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-export async function POST(_: null, { params }: { params: { id: string } }) {
+export async function POST(_: Request, { params }: { params: { id: string } }) {
 	const { id } = params;
 
 	try {

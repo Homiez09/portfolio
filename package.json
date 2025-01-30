@@ -21,6 +21,7 @@
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^9.0.1",
+    "sharp": "^0.33.5",
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {

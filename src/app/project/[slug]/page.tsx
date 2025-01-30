@@ -39,9 +39,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     }
 };
 
-const Page = async ({ params }: Props) => {
+export default async ({ params }: Props) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`).then((res) => res).catch((err) => err.response);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
         const project: Project = response.data.data;
     
         return (
@@ -80,26 +80,3 @@ const Page = async ({ params }: Props) => {
         </div>;
     }
 }
-
-export const ProjectSkeleton = () => {
-    return (
-        <div className="flex flex-col gap-3 animate-pulse">
-            <div className="flex flex-row justify-between items-end">
-                <div className="w-20 h-6 bg-gray-300 rounded"></div>
-                <div className="w-16 h-4 bg-gray-300 rounded"></div>
-            </div>
-            <div className="relative w-full h-72 bg-gray-300 rounded-md"></div>
-            <div className="flex flex-col gap-2 pb-5 border-b">
-                <div className="w-3/4 h-8 bg-gray-300 rounded"></div>
-                <div className="flex flex-row gap-1">
-                    <div className="w-12 h-6 bg-gray-300 rounded"></div>
-                    <div className="w-12 h-6 bg-gray-300 rounded"></div>
-                    <div className="w-12 h-6 bg-gray-300 rounded"></div>
-                </div>
-            </div>
-            <div className="prose self-center w-full h-40 bg-gray-300 rounded"></div>
-        </div>
-    );
-}
-
-export default Page;
