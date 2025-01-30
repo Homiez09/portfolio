@@ -1,9 +1,8 @@
-import { ibm } from "@/libs/fonts";
 import { Suspense } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <div className={`flex justify-center ${ibm.className}`}>
+        <div className='flex justify-center'>
             <div className="w-[680px]">
                 <Suspense fallback={<ProjectSkeleton />}>
                     {children}

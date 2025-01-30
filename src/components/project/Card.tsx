@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import { ibmbold } from '@/libs/fonts';
+import { kanit } from '@/libs/fonts';
 import { CategoryList } from './CategoryList';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -26,7 +26,7 @@ export const Card = ({ props, highlight }: any) => {
         <div className="flex flex-col p-2">
           <div className="flex flex-col">
             {/* Title */}
-            <div id={`title${props.id}`} className={`text-xl ${ibmbold.className}`}>{props.title}</div>
+            <div id={`title${props.id}`} className={`text-xl ${kanit.className} font-bold`}>{props.title}</div>
             <div className="w-full items-center gap-3 block">
               {/* Description */}
               <div id={`description${props.id}`} className="text-ellipsis text-wrap overflow-hidden">

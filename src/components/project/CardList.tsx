@@ -1,8 +1,8 @@
 'use client';
 
 import { Card, CardSkeleton } from './Card';
-import { Project } from '@/types/TypeProject';
-import { ibm } from '@/libs/fonts';
+import { Project } from '@/types/Project';
+import { kanit } from '@/libs/fonts';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ export const CardList = () => {
 
     return (
         <>
-            <div className={`flex flex-col gap-5 justify-center w-full ${ibm.className}`}>
+            <div className={`flex flex-col gap-5 justify-center w-full ${kanit.className}`}>
                 {projects?.filter((project) => {
                     if (query) {
                         return project.title.toLowerCase().includes(query.toLowerCase()) ||
@@ -44,7 +44,7 @@ export const CardList = () => {
 export const CardListSkeleton = () => {
     return (
         <>
-            <div className={`flex flex-col gap-5 justify-center w-full ${ibm.className}`}>
+            <div className={`flex flex-col gap-5 justify-center w-full`}>
                 {[0, 0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
             </div>
         </>

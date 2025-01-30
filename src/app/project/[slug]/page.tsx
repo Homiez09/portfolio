@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import { ibmbold } from "@/libs/fonts";
 import { CategoryList } from "@/components/project/CategoryList";
-import { Project } from "@/types/TypeProject";
+import { Project } from "@/types/Project";
 import { timeFormat } from "@/libs/timeFormat";
 import { Metadata } from "next";
 
@@ -61,7 +60,7 @@ export default async ({ params }: Props) => {
                 </div>
                 <div className="flex flex-col gap-2 pb-5 border-b">
                     {/* Title */}
-                    <p className={`text-3xl ${ibmbold.className} `}>{project!.title}</p>
+                    <p className='text-3xl font-bold'>{project!.title}</p>
                     <div className="flex flex-row gap-1">
                         <CategoryList categorys={project!.tags} />
                     </div>
