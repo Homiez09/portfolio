@@ -1,4 +1,3 @@
-// app/api/resume/route.tsx
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -22,6 +21,6 @@ export async function POST() {
             );
         }
     } catch (err) {
-        return NextResponse.json({ status: 400 }, { status: 400 })
+        return NextResponse.json({ status: 404, error: 'Failed Fetching' }, { status: 404 })
     }
 }

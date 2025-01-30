@@ -1,5 +1,3 @@
-'use client';
-
 import Image from "next/image";
 import { PositionStat } from "@/components/PositionStat";
 import { Social } from "@/components/Social";
@@ -12,6 +10,7 @@ export default function Index() {
                     id="profile-phum"
                     priority
                     fill
+                    sizes="(min-width: 640px) 128px, 96px"
                     className="object-cover rounded-full"
                     src="https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no"
                     alt="Phumrapee Soenvanichakul (HomieZ09)"
