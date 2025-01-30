@@ -2,7 +2,7 @@
 
 import { Card, CardSkeleton } from './Card';
 import { Project } from '@/types/TypeProject';
-import { ibm } from '@/libs/font';
+import { ibm } from '@/libs/fonts';
 import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import { useEffect, useState } from 'react';

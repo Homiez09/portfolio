@@ -1,6 +1,6 @@
 'use client';
 
-import { ibmbold } from "@/libs/font";
+import { ibmbold } from "@/libs/fonts";
 import { SearchBox } from "@/components/project/SearchBox";
 import { CardList } from "@/components/project/CardList";
 

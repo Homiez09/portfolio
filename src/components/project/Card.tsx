@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import { ibmbold } from '@/libs/font';
+import { ibmbold } from '@/libs/fonts';
 import { CategoryList } from './CategoryList';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

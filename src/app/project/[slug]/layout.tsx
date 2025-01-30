@@ -1,4 +1,4 @@
-import { ibm } from "@/libs/font";
+import { ibm } from "@/libs/fonts";
 import { Suspense } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {

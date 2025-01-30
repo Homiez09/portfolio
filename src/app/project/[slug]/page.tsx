@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import { ibmbold } from "@/libs/font";
+import { ibmbold } from "@/libs/fonts";
 import { CategoryList } from "@/components/project/CategoryList";
 import { Project } from "@/types/TypeProject";
 import { timeFormat } from "@/libs/timeFormat";
