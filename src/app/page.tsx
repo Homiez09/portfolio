@@ -1,11 +1,7 @@
 import Index from "@/components/sessions/Index";
+import ProjectComp from "@/components/sessions/Project";
 import { Project } from "@/types/TypeProject";
 import axios from "axios";
-import dynamic from 'next/dynamic';
-
-const ProjectComponent = dynamic(() => import('@/components/sessions/Project'), {
-  ssr: false,
-});
 
 export const generateMetadata = async () => {
   try {
@@ -106,7 +102,7 @@ export default () => {
   return (
     <div className="container space-y-20 max-w-5xl">
       <Index />
-      <ProjectComponent />
+      <ProjectComp />
     </div>
   );
 }

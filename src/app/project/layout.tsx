@@ -1,7 +1,4 @@
-'use client';
-
 import { ibm } from "@/libs/font";
-import { Suspense } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (

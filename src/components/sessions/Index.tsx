@@ -1,5 +1,3 @@
-'use client';
-
 import Image from "next/image";
 import { PositionStat } from "@/components/PositionStat";
 import { Social } from "@/components/Social";
