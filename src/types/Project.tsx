@@ -1,4 +1,4 @@
-import { ITag } from "./TypeTag";
+import { ITag } from "./Tag";
 
 export type Project = {
     id: number;
