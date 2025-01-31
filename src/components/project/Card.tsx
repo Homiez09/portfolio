@@ -5,7 +5,6 @@ import { kanit } from '@/libs/fonts';
 import { CategoryList } from './CategoryList';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { timeFormat } from '@/libs/timeFormat';
 
 export const Card = ({ props, highlight }: any) => {
   const query = highlight;

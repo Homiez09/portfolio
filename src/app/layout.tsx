@@ -64,7 +64,7 @@ export default function RootLayout({
         />
         <Webring />
         <Navbar />
-        <div className="container px-5">
+        <div className="container px-4">
           <AntdStyledComponentsRegistry>
             {children}
           </AntdStyledComponentsRegistry>

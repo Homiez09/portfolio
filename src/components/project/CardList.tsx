@@ -3,38 +3,21 @@
 import { Card, CardSkeleton } from './Card';
 import { Project } from '@/types/Project';
 import { kanit } from '@/libs/fonts';
-import { useSearchParams } from 'next/navigation';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { FC } from 'react';
 
-export const CardList = () => {
-    const [projects, setProjects] = useState<Project[] | null>(null);
-    const query = useSearchParams().get("query") || "";
+interface CardListProps {
+    projects: Project[];
+}
 
-    const fetchProjects = async () => {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents`).then((res) => res).catch((err) => err.response);
-        setProjects(response.data.data);
-    }
-
-    useEffect(() => {
-        fetchProjects();
-    }, []);
-
+export const CardList: FC<CardListProps> = ({ projects }) => {
     if (!projects) return <CardListSkeleton />;
     if (projects.length === 0) return <div>No projects found.</div>;
 
     return (
         <>
             <div className={`flex flex-col gap-5 justify-center w-full ${kanit.className}`}>
-                {projects?.filter((project) => {
-                    if (query) {
-                        return project.title.toLowerCase().includes(query.toLowerCase()) ||
-                            project.description.toLowerCase().includes(query.toLowerCase()) ||
-                            project.tags.some((tag) => tag.name.toLowerCase().includes(query.toLowerCase()));
-                    }
-                    return true;
-                }).map((project, key) => (
-                    <Card key={key} props={project} highlight={query} />
+                {projects?.map((project, key) => (
+                    <Card key={key} props={project} highlight='' />
                 ))}
             </div>
         </>

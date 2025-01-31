@@ -13,7 +13,7 @@ type Props = {
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
         
         return {
@@ -38,9 +38,9 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     }
 };
 
-export default async ({ params }: Props) => {
+const Page = async ({ params }: Props) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
     
         return (
@@ -79,3 +79,5 @@ export default async ({ params }: Props) => {
         </div>;
     }
 }
+
+export default Page;
