@@ -17,6 +17,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
 
     const [tags, setTags] = useState<ITag[] | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>(search);
+    const [tagTerm, setTagTerm] = useState<string>(tag);
 
     const createQueryString = useCallback(
         (name: string, value: string) => {
@@ -28,9 +29,14 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
         [searchParams]
     )
 
-    const updateQuery = (e?: ChangeEvent<HTMLInputElement>) => {
+    const updateSearchQuery = (e?: ChangeEvent<HTMLInputElement>) => {
         router.push('search?' + createQueryString('search', e!.target.value));
         setSearchTerm(e!.target.value);
+    }
+
+    const updateTagQuery = (e: ChangeEvent<HTMLSelectElement>) => {
+        router.push('search?' + createQueryString('tag', e.target.value));
+        setTagTerm(e.target.value);
     }
 
     const clearQuery = () => {
@@ -51,14 +57,13 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
         fetchTags();
     }, []);
 
-
     return (
         <div className="w-full p-2 flex flex-col gap-2">
             <div className="flex flex-col lg:flex-row w-full gap-3">
                 <div className="flex w-full">
                     <input
                         className="border w-full px-3 py-2 rounded-md"
-                        onChange={(e) => updateQuery(e)}
+                        onChange={(e) => updateSearchQuery(e)}
                         value={searchTerm}
                         placeholder="Find a project..."
                     />
@@ -66,7 +71,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                 <div className="flex w-auto">
                     <div className="relative inline-block">
                         <select
-                            onChange={(e) => router.push('search?' + createQueryString('tag', e.target.value))}
+                            onChange={(e) => updateTagQuery(e)}
+                            value={tag}
                             className="border border-gray-300 rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                             <option value="All">All</option>

@@ -1,4 +1,5 @@
 import { CardList } from "@/components/project/CardList";
+import { SearchBox } from "@/components/project/SearchBox";
 import { Social } from "@/components/Social";
 import axios from "axios";
 import Image from "next/image";
@@ -46,6 +47,7 @@ const Home = async () => {
                 <p className="text-4xl font-bold text-gray-700">
                     PROJECTS
                 </p>
+                <SearchBox />
                 <CardList projects={response.data} />
             </div>
         </div>
