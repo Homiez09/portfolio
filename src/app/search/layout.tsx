@@ -1,9 +1,11 @@
+import { Suspense } from "react";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <div className='flex justify-center'>
-            <div className="w-[680px]">
+        <>
+            <div className={`mt-8`}>
                 {children}
             </div>
-        </div>
+        </>
     );
 }

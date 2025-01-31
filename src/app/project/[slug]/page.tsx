@@ -2,9 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import { ibmbold } from "@/libs/font";
 import { CategoryList } from "@/components/project/CategoryList";
-import { Project } from "@/types/TypeProject";
+import { Project } from "@/types/Project";
 import { timeFormat } from "@/libs/timeFormat";
 import { Metadata } from "next";
 
@@ -14,7 +13,7 @@ type Props = {
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
         
         return {
@@ -39,15 +38,15 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     }
 };
 
-export default async ({ params }: Props) => {
+const Page = async ({ params }: Props) => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/contents/${params.slug}`);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
     
         return (
             <div className="flex flex-col gap-3">
                 <div className="flex flex-row justify-between items-end">
-                    <Link href="/project" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
+                    <Link href="/search" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
                     {/* Date */}
                     <small className="text-gray-500">{timeFormat(project!.createdAt)}</small>
                 </div>
@@ -61,7 +60,7 @@ export default async ({ params }: Props) => {
                 </div>
                 <div className="flex flex-col gap-2 pb-5 border-b">
                     {/* Title */}
-                    <p className={`text-3xl ${ibmbold.className} `}>{project!.title}</p>
+                    <p className='text-3xl font-bold'>{project!.title}</p>
                     <div className="flex flex-row gap-1">
                         <CategoryList categorys={project!.tags} />
                     </div>
@@ -80,3 +79,5 @@ export default async ({ params }: Props) => {
         </div>;
     }
 }
+
+export default Page;

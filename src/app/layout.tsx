@@ -1,13 +1,12 @@
 import { Kanit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import "./globals.css";
+import "@/styles/globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Webring } from "@/components/Webring";
 import { Toaster } from 'react-hot-toast';
 import Footer from "@/components/Footer";
 import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
-
-const kanit = Kanit({ subsets: ["latin"], weight: ["300", "700"] });
+import { kanit } from "@/libs/fonts";
 
 export const metadata = {
   title: 'Phumrapee Soenvanichakul',
@@ -64,9 +63,9 @@ export default function RootLayout({
           reverseOrder={false}
         />
         <Webring />
-        <Navbar />
-        <div className="container px-5">
+        <div className="container px-4 min-h-screen">
           <AntdStyledComponentsRegistry>
+            <Navbar />
             {children}
           </AntdStyledComponentsRegistry>
         </div>
