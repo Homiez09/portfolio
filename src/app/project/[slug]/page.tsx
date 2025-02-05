@@ -50,14 +50,14 @@ const Page = async ({ params }: Props) => {
                     {/* Date */}
                     <small className="text-gray-500">{timeFormat(project!.createdAt)}</small>
                 </div>
-                <div className="relative w-full h-72">
+                {/* <div className="relative w-full h-72">
                     <Image
                         alt={project!.title}
                         src={project!.banner.url}
                         fill={true}
-                        className="object-cover rounded-md shadow-md"
+                        className={`rounded-md shadow-md ${project!.banner.height > project!.banner.width ? 'object-contain' : 'object-cover'}`}
                     />
-                </div>
+                </div> */}
                 <div className="flex flex-col gap-2 pb-5 border-b">
                     {/* Title */}
                     <p className='text-3xl font-bold'>{project!.title}</p>
