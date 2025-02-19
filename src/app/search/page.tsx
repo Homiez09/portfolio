@@ -20,20 +20,20 @@ const getResults = async (search: string, tag: string) => {
 const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
     const search = searchParams.search ? searchParams.search : '';
     const tag = searchParams.tag ? searchParams.tag : ''
-    
-    const response = await getResults(searchParams.search ? String(searchParams.search) : "", (searchParams.tag || String(searchParams.tag)=== 'All') ? String(searchParams.tag) : "");
 
-        return (
-            <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
-                <div className="flex flex-col items-center w-full">
-                    <p className='text-4xl font-bold pb-5'>PROJECTS</p>
-                    <SearchBox search={String(search)} tag={String(tag)} found={response.data.length} />
-                </div>
-                <div className="flex flex-row justify-center w-full">
-                    <CardList projects={response.data} />
-                </div>
+    const response = await getResults(searchParams.search ? String(searchParams.search) : "", (searchParams.tag || String(searchParams.tag) === 'All') ? String(searchParams.tag) : "");
+
+    return (
+        <div className="flex flex-col items-center gap-8 max-w-3xl mx-auto">
+            <div className="flex flex-col items-center w-full">
+                <p className='text-4xl font-bold pb-5'>PROJECTS</p>
+                <SearchBox search={String(search)} tag={String(tag)} found={response.data.length} />
             </div>
-        );
+            <div className="flex flex-row justify-center w-full">
+                <CardList projects={response.data} />
+            </div>
+        </div>
+    );
 };
 
 export default SearchPage;

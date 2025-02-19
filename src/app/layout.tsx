@@ -1,4 +1,3 @@
-import { Kanit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 import { Navbar } from "@/components/Navbar";
@@ -9,6 +8,7 @@ import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
 import { kanit } from "@/libs/fonts";
 
 export const metadata = {
+  icons: '/icon.webp',
   title: 'Phumrapee Soenvanichakul',
   description: `I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
   I'm a student at Kasetsart University, majoring in Computer Science.
