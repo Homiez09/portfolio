@@ -73,7 +73,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                         <select
                             onChange={(e) => updateTagQuery(e)}
                             value={tag}
-                            className="border border-gray-300 rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="border border-gray-300 rounded-lg p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-[100px]"
                         >
                             <option value="All">All</option>
                             {tags?.map((tag) => (

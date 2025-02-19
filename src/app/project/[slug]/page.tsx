@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
@@ -15,7 +14,6 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
-        
         return {
             title: project.title,
             description: project.description,
@@ -42,7 +40,7 @@ const Page = async ({ params }: Props) => {
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
-    
+
         return (
             <div className="flex flex-col gap-3">
                 <div className="flex flex-row justify-between items-end">
