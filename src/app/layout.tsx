@@ -8,7 +8,7 @@ import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
 import { kanit } from "@/libs/fonts";
 
 export const metadata = {
-  icons: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
+  icons: '/icon.webp',
   title: 'Phumrapee Soenvanichakul',
   description: `I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
   I'm a student at Kasetsart University, majoring in Computer Science.

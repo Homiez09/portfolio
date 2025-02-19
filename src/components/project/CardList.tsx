@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardSkeleton } from './Card';
 import { Project } from '@/types/Project';
 import { kanit } from '@/libs/fonts';

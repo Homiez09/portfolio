@@ -1,28 +1,25 @@
-'use client'
-
 import Image from 'next/image';
 import { kanit } from '@/libs/fonts';
-import { CategoryList } from './CategoryList';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { timeCardFormat } from '@/libs/timeFormat';
+import { Project } from '@/types/Project';
 
-export const Card = ({ props, highlight }: any) => {
-  const query = highlight;
-  const router = useRouter();
+export const Card = ({ props, highlight }: { props: Project, highlight: string }) => {
+  // const query = highlight;
 
-  useEffect(() => {
-    let title = document.querySelector(`#title${props.id}`);
-    let description = document.querySelector(`#description${props.id}`);
+  // useEffect(() => {
+  //   let title = document.querySelector(`#title${props.id}`);
+  //   let description = document.querySelector(`#description${props.id}`);
 
-    if (query === "") return;
-    title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-    description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-  }, [query])
+  //   if (query === "") return;
+  //   title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+  //   description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
+  // }, [query])
 
   return (
     <>
-      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer" onClick={() => router.push(`project/${props.documentId}`)}>
-        <div className="flex flex-col p-2">
+      <Link href={`project/${props.documentId}`} className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer" /* onClick={() => router.push(`project/${props.documentId}`)} */>
+        <div className="flex flex-col p-2 w-full gap-5">
           <div className="flex flex-col">
             {/* Title */}
             <div id={`title${props.id}`} className={`text-xl ${kanit.className} font-bold`}>{props.title}</div>
@@ -34,8 +31,12 @@ export const Card = ({ props, highlight }: any) => {
             </div>
           </div>
           {/* Categorys */}
-          <div className="pt-2">
-            <CategoryList categorys={props.tags} />
+          <div className="flex gap-4">
+            {/* <CategoryList categorys={props.tags} /> */}
+            {props.tags.map((tag: any, key: any) => (
+              <div className='text-small'>{tag.name}</div>
+            ))}
+            <div className="text-gray-500 text-small">Update on {timeCardFormat(props.updatedAt)}</div>
           </div>
         </div>
         {/* Image */}
@@ -50,7 +51,7 @@ export const Card = ({ props, highlight }: any) => {
             />
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
@@ -67,7 +68,7 @@ export const CardSkeleton = () => {
           </div>
           {/* Categorys */}
           <div className="pt-2 flex flex-row gap-2">
-            <div className="w-6 h-3 bg-gray-300"></div> 
+            <div className="w-6 h-3 bg-gray-300"></div>
             <div className="w-6 h-3 bg-gray-300"></div>
             <div className="w-6 h-3 bg-gray-300"></div>
           </div>

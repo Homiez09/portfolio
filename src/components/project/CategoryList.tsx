@@ -1,33 +1,15 @@
-'use client';
-
-import { Tag } from 'antd';
-import { useRouter } from 'next/navigation';
 import { FC } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { ITag } from '@/types/Tag';
+import Link from 'next/link';
 
 export const CategoryList: FC<{ categorys: ITag[] }> = ({ categorys }) => {
-    const query = useSearchParams().get("tag");
-    const router = useRouter();
-
-    const onTagClick = (e: React.MouseEvent<HTMLSpanElement>, tag: ITag) => {
-        e.stopPropagation();
-        router.push(`/search?tag=${tag.name}`);
-    }
-
     return (
-        <>
+        <div className="flex gap-2">
             {categorys.map((category: ITag, key: any) => (
-                <Tag
-                    key={key}
-                    bordered={true}
-                    color={category.name.toLowerCase().includes(query?.toLowerCase() || "$tag") ? "success" : "processing"}
-                    className="hover:cursor-pointer hover:text-black"
-                    onClick={(e) => onTagClick(e, category)}
-                >
-                    {category.name}
-                </Tag>
+                <Link href={`/search?tag=${category.name}`} key={key}>
+                    <div className='border text-small px-4 py-1 rounded-full'>{category.name}</div>
+                </Link>
             ))}
-        </>
+        </div>
     )
 }
