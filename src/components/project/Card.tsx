@@ -31,12 +31,15 @@ export const Card = ({ props, highlight }: { props: Project, highlight: string }
             </div>
           </div>
           {/* Categorys */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             {/* <CategoryList categorys={props.tags} /> */}
             {props.tags.map((tag: any, key: any) => (
-              <div className='text-small'>{tag.name}</div>
+              <div key={key} className='flex gap-1 items-center'>
+                <div className="w-2 h-2 rounded-full bg-red-500" /> {/* รอใสีสีให้ tag */}
+                <div className='text-small'>{tag.name}</div>
+              </div>
             ))}
-            <div className="text-gray-500 text-small">Update on {timeCardFormat(props.updatedAt)}</div>
+            <div className="text-gray-500 text-small">Created on {timeCardFormat(props.createdAt)}</div>
           </div>
         </div>
         {/* Image */}
