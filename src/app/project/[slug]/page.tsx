@@ -46,7 +46,7 @@ const Page = async ({ params }: Props) => {
                 <div className="flex flex-row justify-between items-end">
                     <Link href="/search" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
                     {/* Date */}
-                    <small className="text-gray-500">Created: {timeFormat(project!.createdAt)}</small>
+                    <small className="text-gray-500">{timeFormat(project!.createdAt)}</small>
                 </div>
                 {/* <div className="relative w-full h-72">
                     <Image

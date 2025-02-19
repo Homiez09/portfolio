@@ -5,7 +5,7 @@ export const timeFormat = (date: string) => {
   const year = d.getFullYear();
   const hr = d.getHours();
   const min = d.getMinutes();
-  return `${day}-${month}-${year} (${String(hr).padStart(2, "0")}:${String(min).padStart(2, "0")})`;
+  return `${month} ${day}, ${year} (${String(hr).padStart(2, "0")}:${String(min).padStart(2, "0")})`;
 };
 
 export const timeCardFormat = (date: string) => {
