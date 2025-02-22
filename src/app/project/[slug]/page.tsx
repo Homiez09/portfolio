@@ -42,7 +42,7 @@ const Page = async ({ params }: Props) => {
         const project: Project = response.data.data;
 
         return (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mb-14">
                 <div className="flex flex-row justify-between items-end">
                     <Link href="/search" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
                     {/* Date */}

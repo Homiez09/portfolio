@@ -31,7 +31,7 @@ export const Navbar = () => {
     }
     return (
         <>
-            <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 left-0 right-0 bg-white ${(usePathname() === "/") ? 'absolute z-[999]' : ''}`}>
+            <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 bg-white ${(usePathname() === "/") ? 'absolute z-[999]' : ''}`}>
                 <Link className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" href="/">Portfolio</Link>
                 <motion.button
                     disabled={!resumeURI}

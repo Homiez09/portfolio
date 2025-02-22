@@ -63,7 +63,7 @@ export default function RootLayout({
           reverseOrder={false}
         />
         <Webring />
-        <div className="container px-4 min-h-screen">
+        <div className="container min-h-screen">
           <AntdStyledComponentsRegistry>
             <Navbar />
             {children}
