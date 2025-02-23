@@ -66,7 +66,9 @@ export default function RootLayout({
         <div className="container min-h-screen">
           <AntdStyledComponentsRegistry>
             <Navbar />
-            {children}
+            <div className="px-4">
+              {children}
+            </div>
           </AntdStyledComponentsRegistry>
         </div>
         <Footer />
