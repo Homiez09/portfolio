@@ -10,9 +10,7 @@ export async function POST(request: Request) {
 			},
 		});
 
-		if (res.status === 200) {
-			return NextResponse.json(res.data)
-		}
+		if (res.status === 200) return NextResponse.json(res.data)
 	} catch (err) {
 		console.log('Error fetching data:', err);
 	}
@@ -48,7 +46,6 @@ export async function POST(request: Request) {
 		`);
 		return NextResponse.json({ data: dbRes.rows });
 	} catch (err) {
-		console.error('Error querying database:', err);
 		return NextResponse.json({ status: 404, error: 'Failed Fetching' }, { status: 404 });
 	}
 }
