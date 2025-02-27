@@ -1,7 +1,7 @@
 'use client';
 
-import React, { ChangeEvent, FC, useCallback, useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import axios from "axios";
 import { ITag } from "@/types/Tag";
 
@@ -14,6 +14,9 @@ interface SearchBoxProps {
 export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0, }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
+
+    const searchInputRef = useRef<HTMLInputElement>(null);
 
     const [tags, setTags] = useState<ITag[] | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>(search);
@@ -55,6 +58,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
 
     useEffect(() => {
         fetchTags();
+        if (pathname === "/search") searchInputRef.current?.focus();
     }, []);
 
     return (
@@ -62,6 +66,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
             <div className="flex flex-col lg:flex-row w-full gap-3">
                 <div className="flex w-full">
                     <input
+                        ref={searchInputRef}
                         className="border w-full px-3 py-2 rounded-md"
                         onChange={(e) => updateSearchQuery(e)}
                         value={searchTerm}
