@@ -45,13 +45,13 @@ export const Card = ({ props, highlight }: { props: Project, highlight: string }
         {/* Image */}
         <div className="ml-auto">
           <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            <Image
+            {props.banner ? <Image
               src={props.banner.url}
               alt="Project"
               className='object-contain'
               fill
               sizes='(min-width: 640px) 150px, 100px'
-            />
+            /> : <div className="flex items-center justify-center h-full w-full">Not available</div>}
           </div>
         </div>
       </Link>
