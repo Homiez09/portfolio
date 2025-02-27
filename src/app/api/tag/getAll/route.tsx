@@ -1,3 +1,4 @@
+import { pool } from "@/db/server";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -9,18 +10,33 @@ export async function POST() {
             }
         });
 
-        if (res.status === 200) {
-            return NextResponse.json({ data: res.data.data })
-        } else {
-            return NextResponse.json(
-                {
-                    error: "Failed to fetch project contents",
-                    details: res.data,
-                },
-                { status: res.status }
-            );
-        }
+        if (res.status === 200) return NextResponse.json({ data: res.data.data })
+        return NextResponse.json(
+            {
+                status: res.status,
+                msg: res.data,
+            },
+            { status: res.status }
+        );
     } catch (err) {
-        return NextResponse.json({ status: 404, error: 'Failed Fetching' }, { status: 404 })
+        console.log('Error fetching data:', err);
+    }
+
+    try {
+        const dbRes = await pool.query(`
+            SELECT 
+                id,
+                document_id AS "documentId",
+                name,
+                created_at AS "createdAt",
+                updated_at AS "updatedAt",
+                published_at AS "publishedAt",
+                name
+            FROM tags
+            WHERE published_at IS NOT NULL
+            `);
+        return NextResponse.json({ data: dbRes.rows });
+    } catch (err) {
+        return NextResponse.json({ status: 404, error: 'Failed Fetching' }, { status: 404 });
     }
 }

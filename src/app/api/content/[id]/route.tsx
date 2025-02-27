@@ -13,6 +13,13 @@ export async function POST(_: Request, { params }: { params: { id: string } }) {
 		});
 
 		if (res.status === 200) return NextResponse.json(res.data);
+		return NextResponse.json(
+			{
+				status: res.status,
+				msg: res.data,
+			},
+			{ status: res.status }
+		);
 	} catch (err) {
 		console.log('Error fetching data:', err);
 	}
