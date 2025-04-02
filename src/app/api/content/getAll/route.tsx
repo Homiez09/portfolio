@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
 	try {
-		const res = await axios.get(`${process.env.BACKEND_URI}/api/project-contents?populate=*&sort[0]=createdAt:desc`, {
+		const res = await axios.get(`${process.env.BACKEND_URI}/api/project-contents?populate=*&sort[0]=updatedAt:desc`, {
 			headers: {
 				Authorization: `Bearer ${process.env.API_TOKEN}`,
 			},
