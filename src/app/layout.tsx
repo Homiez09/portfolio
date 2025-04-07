@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import Footer from "@/components/Footer";
 import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
 import { kanit } from "@/libs/fonts";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   icons: '/icon.webp',
@@ -57,6 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Analytics />
+      <SpeedInsights/>
       <body className={kanit.className}>
         <Toaster
           position="top-center"
