@@ -1,8 +1,8 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { ITag } from '@/types/Tag';
 import Link from 'next/link';
+import { ITag } from "@/interface/tag";
 
 export const CategoryList: FC<{ categorys: ITag[] }> = ({ categorys }) => {
     const [showAll, setShowAll] = useState(false);

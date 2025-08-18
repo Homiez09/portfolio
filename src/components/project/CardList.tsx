@@ -1,10 +1,10 @@
+import { IProjectContent } from '@/interface/project-content';
 import { Card, CardSkeleton } from './Card';
-import { Project } from '@/types/Project';
 import { kanit } from '@/libs/fonts';
 import { FC } from 'react';
 
 interface CardListProps {
-    projects: Project[];
+    projects: IProjectContent[];
 }
 
 export const CardList: FC<CardListProps> = ({ projects }) => {

@@ -4,13 +4,13 @@ import { useState } from 'react';
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { CategoryList } from "@/components/project/CategoryList";
-import { Project } from "@/types/Project";
 import { timeFormat } from "@/libs/timeFormat";
 import Image from "next/image";
 import { ImageViewer } from "@/components/theme/ImageViewer";
+import { IProjectContent } from '@/interface/project-content';
 
 interface ProjectContentProps {
-    project: Project;
+    project: IProjectContent;
 }
 
 export const ProjectContent = ({ project }: ProjectContentProps) => {

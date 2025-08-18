@@ -3,7 +3,7 @@
 import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import axios from "axios";
-import { ITag } from "@/types/Tag";
+import { ITag } from "@/interface/tag";
 
 interface SearchBoxProps {
     search?: string;

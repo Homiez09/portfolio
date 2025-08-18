@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { IMedia } from '@/types/Media';
+import { IMedia } from '@/interface/media';
 
 interface ImageViewerProps {
     images: IMedia[];

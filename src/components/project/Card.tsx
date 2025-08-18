@@ -2,10 +2,10 @@ import Image from 'next/image';
 import { kanit } from '@/libs/fonts';
 import Link from 'next/link';
 import { timeCardFormat } from '@/libs/timeFormat';
-import { Project } from '@/types/Project';
 import { CategoryList } from './CategoryList';
+import { IProjectContent } from '@/interface/project-content';
 
-export const Card = ({ props, highlight }: { props: Project, highlight: string }) => {
+export const Card = ({ props, highlight }: { props: IProjectContent, highlight: string }) => {
   return (
 
       <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all duration-500 ease-out">

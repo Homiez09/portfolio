@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Project } from "@/types/Project";
 import { Metadata } from "next";
 import { ProjectContent } from "@/components/theme/ProjectContent";
+import { IProjectContent } from "@/interface/project-content";
 
 type Props = {
     params: { slug: string }
@@ -10,7 +10,7 @@ type Props = {
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
-        const project: Project = response.data.data;
+        const project: IProjectContent = response.data.data;
         return {
             title: project.title,
             description: project.description,
@@ -36,7 +36,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 const Page = async ({ params }: Props) => {
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
-        const project: Project = response.data.data;
+        const project: IProjectContent = response.data.data;
 
         return <ProjectContent project={project} />;
     } catch (err) {
