@@ -35,7 +35,6 @@ export async function POST(_: Request, { params }: { params: { id: string } }) {
 				pc.updated_at AS "updatedAt", 
 				pc.published_at AS "publishedAt", 
 				pc.content, 
-				pc.date,
 				json_agg(jsonb_build_object(
 					'id', t.id,
 					'documentId', t.document_id,
