@@ -35,7 +35,7 @@ export const ProjectContent = ({ project }: ProjectContentProps) => {
                     <small className="text-gray-500">{timeFormat(project.createdAt)}</small>
                 </div>
                 
-                <div className="flex flex-col gap-2 pb-5 border-b">
+                <div className="flex flex-col gap-2 pb-3 border-b">
                     {/* Title */}
                     <p className='text-3xl font-bold'>{project.title}</p>
                     <div className="flex flex-row gap-1">
