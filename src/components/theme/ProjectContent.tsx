@@ -39,7 +39,7 @@ export const ProjectContent = ({ project }: ProjectContentProps) => {
                     {/* Title */}
                     <p className='text-3xl font-bold'>{project.title}</p>
                     <div className="flex flex-row gap-1">
-                        <CategoryList categorys={project.tags} />
+                        <CategoryList categorys={project.tags} isSearchTag />
                     </div>
                 </div>
                 
