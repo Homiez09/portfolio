@@ -9,9 +9,10 @@ import axios from "axios";
 
 interface ProjectListProps {
     initialData: IContent;
+    pageSize?: number;
 }
 
-export const ProjectList = ({ initialData }: ProjectListProps) => {
+export const ProjectList = ({ initialData, pageSize = 6 }: ProjectListProps) => {
     const [data, setData] = useState<IContent>(initialData);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export const ProjectList = ({ initialData }: ProjectListProps) => {
         try {
             const response = await axios.post(`/api/content/getAll`, {
                 page,
-                pageSize: 6
+                pageSize: pageSize
             });
             setData(response.data);
         } catch (error) {
