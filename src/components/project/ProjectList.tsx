@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { CardList } from "@/components/project/CardList";
 import { SearchBox } from "@/components/project/SearchBox";
 import { IContent } from "@/interface/content";
 import { Pagination } from "@nextui-org/react";
+import { useSearchParams } from "next/navigation";
 import axios from "axios";
 
 interface ProjectListProps {
@@ -12,17 +13,24 @@ interface ProjectListProps {
     pageSize?: number;
 }
 
-export const ProjectList = ({ initialData, pageSize = 6 }: ProjectListProps) => {
+export const ProjectList: FC<ProjectListProps> = ({ initialData, pageSize = 6 }) => {
+    const searchParams = useSearchParams();
+
     const [data, setData] = useState<IContent>(initialData);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
-    const fetchData = async (page: number) => {
+    const search = searchParams?.get('search') || '';
+    const tag = searchParams?.get('tag') || '';
+
+    const fetchData = async (page: number, searchQuery?: string, tagQuery?: string) => {
         setLoading(true);
         try {
             const response = await axios.post(`/api/content/getAll`, {
                 page,
-                pageSize: pageSize
+                pageSize: pageSize,
+                search: searchQuery || search,
+                tag: tagQuery || tag
             });
             setData(response.data);
         } catch (error) {
@@ -37,13 +45,18 @@ export const ProjectList = ({ initialData, pageSize = 6 }: ProjectListProps) => 
         fetchData(page);
     };
 
+    useEffect(() => {
+        setCurrentPage(1);
+        fetchData(1);
+    }, [search, tag]);
+
     return (
         <div className={`flex flex-col items-center gap-8 max-w-3xl mx-auto pb-5`}>
             <p className="text-4xl font-bold text-gray-700">
                 PROJECTS
             </p>
-            <SearchBox />
-            <CardList projects={data.data} />
+            <SearchBox search={search} tag={tag} found={data.meta?.pagination.total} />
+            <CardList projects={data.data} isLoading={loading} />
             <Pagination
                 showControls
                 page={currentPage}

@@ -1,11 +1,10 @@
 import Image from 'next/image';
-import { kanit } from '@/libs/fonts';
 import Link from 'next/link';
 import { timeCardFormat } from '@/libs/timeFormat';
 import { CategoryList } from './CategoryList';
 import { IProjectContent } from '@/interface/project-content';
 
-export const Card = ({ props, highlight }: { props: IProjectContent, highlight: string }) => {
+export const Card = ({ props }: { props: IProjectContent }) => {
   return (
 
       <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all duration-500 ease-out">
@@ -73,29 +72,55 @@ export const Card = ({ props, highlight }: { props: IProjectContent, highlight: 
 
 export const CardSkeleton = () => {
   return (
-    <>
-      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none animate-pulse">
-        <div className="flex flex-col p-2 w-2/3">
-          <div className="flex flex-col gap-2">
+    <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 animate-pulse">
+      {/* Background Gradient Skeleton */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-gray-100 to-gray-50/30" />
+      
+      {/* Main Content */}
+      <div className="relative p-6">
+        {/* Header Section */}
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1 min-w-0">
             {/* Title */}
-            <div className="w-32 h-4 bg-gray-300 rounded"></div>
-            <div className="w-full h-4 bg-gray-300 rounded"></div>
+            <div className="h-6 bg-gray-300 rounded-md mb-2 w-3/4"></div>
+            {/* Description */}
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+            </div>
           </div>
-          {/* Categorys */}
-          <div className="pt-2 flex flex-row gap-2">
-            <div className="w-6 h-3 bg-gray-300 rounded"></div>
-            <div className="w-6 h-3 bg-gray-300 rounded"></div>
-            <div className="w-6 h-3 bg-gray-300 rounded"></div>
-          </div>
-        </div>
-        {/* Image */}
-        <div className="ml-auto">
-          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            <div className='w-full h-full bg-gray-300 rounded'>
+          
+          {/* Thumbnail */}
+          <div className="ml-6 flex-shrink-0">
+            <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 shadow-lg">
+              <div className="flex items-center justify-center h-full w-full">
+                <div className="w-8 h-8 bg-gray-400 rounded opacity-50"></div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Tags Section */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-20"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-14"></div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <div className="w-3 h-3 bg-gray-300 rounded"></div>
+            <div className="h-3 bg-gray-200 rounded w-20"></div>
+          </div>
+          
+          <div className="flex items-center gap-1">
+            <div className="h-3 bg-gray-200 rounded w-24"></div>
+            <div className="w-3 h-3 bg-gray-300 rounded"></div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -5,10 +5,11 @@ import { FC } from 'react';
 
 interface CardListProps {
     projects: IProjectContent[];
+    isLoading?: boolean;
 }
 
-export const CardList: FC<CardListProps> = ({ projects }) => {
-    if (!projects) return <CardListSkeleton />;
+export const CardList: FC<CardListProps> = ({ projects, isLoading }) => {
+    if (isLoading) return <CardListSkeleton />;
     if (projects.length === 0) return <div>No projects found.</div>;
 
     return (
@@ -23,7 +24,7 @@ export const CardList: FC<CardListProps> = ({ projects }) => {
                             animationFillMode: 'forwards'
                         }}
                     >
-                        <Card props={project} highlight='' />
+                        <Card props={project} />
                     </div>
                 ))}
             </div>
@@ -35,7 +36,7 @@ export const CardListSkeleton = () => {
     return (
         <>
             <div className={`flex flex-col gap-5 justify-center w-full`}>
-                {[0, 0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
+                {[0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
             </div>
         </>
     )
