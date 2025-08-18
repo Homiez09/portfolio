@@ -1,10 +1,7 @@
-import Link from "next/link";
 import axios from "axios";
-import ReactMarkdown from "react-markdown";
-import { CategoryList } from "@/components/project/CategoryList";
 import { Project } from "@/types/Project";
-import { timeFormat } from "@/libs/timeFormat";
 import { Metadata } from "next";
+import { ProjectContent } from "@/components/theme/ProjectContent";
 
 type Props = {
     params: { slug: string }
@@ -41,36 +38,7 @@ const Page = async ({ params }: Props) => {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/${params.slug}`);
         const project: Project = response.data.data;
 
-        return (
-            <div className="flex flex-col gap-3 mb-14">
-                <div className="flex flex-row justify-between items-end">
-                    <Link href="/search" className="hover:cursor-pointer hover:scale-[1.05]">{'< back'}</Link>
-                    {/* Date */}
-                    <small className="text-gray-500">{timeFormat(project!.createdAt)}</small>
-                </div>
-                {/* <div className="relative w-full h-72">
-                    <Image
-                        alt={project!.title}
-                        src={project!.banner.url}
-                        fill={true}
-                        className={`rounded-md shadow-md ${project!.banner.height > project!.banner.width ? 'object-contain' : 'object-cover'}`}
-                    />
-                </div> */}
-                <div className="flex flex-col gap-2 pb-5 border-b">
-                    {/* Title */}
-                    <p className='text-3xl font-bold'>{project!.title}</p>
-                    <div className="flex flex-row gap-1">
-                        <CategoryList categorys={project!.tags} />
-                    </div>
-                </div>
-                {/* Content */}
-                <div className="prose self-center">
-                    <ReactMarkdown
-                        children={project!.content}
-                    />
-                </div>
-            </div>
-        );
+        return <ProjectContent project={project} />;
     } catch (err) {
         return <div className="text-center">
             Failed to load project.

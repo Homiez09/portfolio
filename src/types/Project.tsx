@@ -1,4 +1,5 @@
 import { ITag } from "./Tag";
+import { IMedia } from "./Media";
 
 export type Project = {
     id: number;
@@ -10,6 +11,7 @@ export type Project = {
     publishedAt: string;
     content: string;
     tags: ITag[];
-    banner: any;
+    banner: IMedia;
     date: string | null; // ในอนาคตจะลบออก
+    screenshots: IMedia[];
 }

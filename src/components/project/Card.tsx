@@ -18,7 +18,7 @@ export const Card = ({ props, highlight }: { props: Project, highlight: string }
 
   return (
     <>
-      <Link href={`project/${props.documentId}`} className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer" /* onClick={() => router.push(`project/${props.documentId}`)} */>
+      <Link href={`project/${props.documentId}`} className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none rounded-lg transition-all duration-300 ease-in-out hover:scale-[1.02] hover:-translate-y-1 hover:shadow-lg active:scale-[0.98] active:translate-y-0 hover:cursor-pointer">
         <div className="flex flex-col p-2 w-full gap-5">
           <div className="flex flex-col">
             {/* Title */}
@@ -44,14 +44,14 @@ export const Card = ({ props, highlight }: { props: Project, highlight: string }
         </div>
         {/* Image */}
         <div className="ml-auto">
-          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            {props.banner ? <Image
+          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100 transition-all duration-300 ease-in-out group-hover:shadow-xl">
+            {props.banner ?             <Image
               src={props.banner.url}
               alt="Project"
-              className='object-contain'
+              className='object-contain transition-transform duration-300 ease-in-out group-hover:scale-105'
               fill
               sizes='(min-width: 640px) 150px, 100px'
-            /> : <div className="flex items-center justify-center h-full w-full">Not available</div>}
+            /> : <div className="flex items-center justify-center h-full w-full transition-all duration-300 ease-in-out group-hover:text-gray-600">Not available</div>}
           </div>
         </div>
       </Link>
@@ -62,24 +62,24 @@ export const Card = ({ props, highlight }: { props: Project, highlight: string }
 export const CardSkeleton = () => {
   return (
     <>
-      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer">
+      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none animate-pulse">
         <div className="flex flex-col p-2 w-2/3">
           <div className="flex flex-col gap-2">
             {/* Title */}
-            <div className="w-32 h-4 bg-gray-300"></div>
-            <div className="w-full h-4 bg-gray-300"></div>
+            <div className="w-32 h-4 bg-gray-300 rounded"></div>
+            <div className="w-full h-4 bg-gray-300 rounded"></div>
           </div>
           {/* Categorys */}
           <div className="pt-2 flex flex-row gap-2">
-            <div className="w-6 h-3 bg-gray-300"></div>
-            <div className="w-6 h-3 bg-gray-300"></div>
-            <div className="w-6 h-3 bg-gray-300"></div>
+            <div className="w-6 h-3 bg-gray-300 rounded"></div>
+            <div className="w-6 h-3 bg-gray-300 rounded"></div>
+            <div className="w-6 h-3 bg-gray-300 rounded"></div>
           </div>
         </div>
         {/* Image */}
         <div className="ml-auto">
           <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            <div className='w-full h-full bg-gray-300'>
+            <div className='w-full h-full bg-gray-300 rounded'>
             </div>
           </div>
         </div>

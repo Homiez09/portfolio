@@ -15,7 +15,16 @@ export const CardList: FC<CardListProps> = ({ projects }) => {
         <>
             <div className={`flex flex-col gap-5 justify-center w-full ${kanit.className}`}>
                 {projects?.map((project, key) => (
-                    <Card key={key} props={project} highlight='' />
+                    <div 
+                        key={key} 
+                        className="animate-fade-in-up opacity-0"
+                        style={{
+                            animationDelay: `${key * 100}ms`,
+                            animationFillMode: 'forwards'
+                        }}
+                    >
+                        <Card props={project} highlight='' />
+                    </div>
                 ))}
             </div>
         </>
