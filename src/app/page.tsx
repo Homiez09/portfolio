@@ -1,12 +1,14 @@
-import { CardList } from "@/components/project/CardList";
-import { SearchBox } from "@/components/project/SearchBox";
+import { ProjectList } from "@/components/project/ProjectList";
 import { Social } from "@/components/Social";
+import { IContent } from "@/interface/content";
 import axios from "axios";
 import Image from "next/image";
 
 const getContents = async () => {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/getAll`);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/getAll`, {
+            pageSize: 3
+        });
         return response.data;
     } catch (error) {
         return { data: [] };
@@ -16,7 +18,7 @@ const getContents = async () => {
 export const dynamic = 'force-dynamic'
 
 const Home = async () => {
-    const response = await getContents();
+    const response = await getContents() as IContent;
 
     return (
         <div className="space-y-20">
@@ -43,13 +45,7 @@ const Home = async () => {
                 </div>
             </div>
 
-            <div className={`flex flex-col items-center gap-8 max-w-3xl mx-auto`}>
-                <p className="text-4xl font-bold text-gray-700">
-                    PROJECTS
-                </p>
-                <SearchBox />
-                <CardList projects={response.data} />
-            </div>
+            <ProjectList initialData={response} pageSize={3} />
         </div>
     );
 }

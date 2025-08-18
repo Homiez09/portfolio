@@ -1,89 +1,126 @@
 import Image from 'next/image';
-import { kanit } from '@/libs/fonts';
 import Link from 'next/link';
 import { timeCardFormat } from '@/libs/timeFormat';
-import { Project } from '@/types/Project';
+import { CategoryList } from './CategoryList';
+import { IProjectContent } from '@/interface/project-content';
 
-export const Card = ({ props, highlight }: { props: Project, highlight: string }) => {
-  // const query = highlight;
-
-  // useEffect(() => {
-  //   let title = document.querySelector(`#title${props.id}`);
-  //   let description = document.querySelector(`#description${props.id}`);
-
-  //   if (query === "") return;
-  //   title!.innerHTML = props.title.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-  //   description!.innerHTML = props.description.replace(new RegExp(query + '(?!([^<]+)?<)', 'gi'), '<mark>$&</mark>');
-  // }, [query])
-
+export const Card = ({ props }: { props: IProjectContent }) => {
   return (
-    <>
-      <Link href={`project/${props.documentId}`} className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer" /* onClick={() => router.push(`project/${props.documentId}`)} */>
-        <div className="flex flex-col p-2 w-full gap-5">
-          <div className="flex flex-col">
-            {/* Title */}
-            <div id={`title${props.id}`} className={`text-xl ${kanit.className} font-bold`}>{props.title}</div>
-            <div className="w-full items-center gap-3 block">
-              {/* Description */}
-              <div id={`description${props.id}`} className="text-ellipsis text-wrap overflow-hidden">
+
+      <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all duration-500 ease-out">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        {/* Main Content */}
+        <div className="relative p-6">
+          {/* Header Section */}
+          <Link href={`project/${props.documentId}`} className="flex items-start justify-between mb-4">
+            <div className="flex-1 min-w-0">
+              <h3 className={`text-xl font-bold text-gray-900 mb-2 line-clamp-2 transition-colors duration-300 group-hover:text-blue-500 `}>
+                {props.title}
+              </h3>
+              <p className="text-gray-600 text-sm line-clamp-3 leading-relaxed">
                 {props.description}
+              </p>
+            </div>
+            
+            {/* Thumbnail */}
+            <div className="ml-6 flex-shrink-0">
+              <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg transition-all duration-300">
+                {props.banner ? (
+                  <Image
+                    src={props.banner.url}
+                    alt="Project thumbnail"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="80px"
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full w-full text-gray-400 text-xs text-center">
+                    No Image
+                  </div>
+                )}
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
             </div>
-          </div>
-          {/* Categorys */}
-          <div className="flex gap-4 flex-wrap">
-            {/* <CategoryList categorys={props.tags} /> */}
-            {props.tags.map((tag: any, key: any) => (
-              <div key={key} className='flex gap-1 items-center'>
-                <div className="w-2 h-2 rounded-full bg-red-500" /> {/* รอใสีสีให้ tag */}
-                <div className='text-small'>{tag.name}</div>
-              </div>
-            ))}
-            <div className="text-gray-500 text-small">Created on {timeCardFormat(props.createdAt)}</div>
-          </div>
-        </div>
-        {/* Image */}
-        <div className="ml-auto">
-          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            {props.banner ? <Image
-              src={props.banner.url}
-              alt="Project"
-              className='object-contain'
-              fill
-              sizes='(min-width: 640px) 150px, 100px'
-            /> : <div className="flex items-center justify-center h-full w-full">Not available</div>}
+          </Link>
+
+          {/* Tags Section */}
+          <CategoryList categorys={props.tags} />
+
+          {/* Footer */}
+          <div className="flex items-center justify-between text-xs text-gray-500">
+            <span className="flex items-center gap-1">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {timeCardFormat(props.createdAt)}
+            </span>
+            
+            <div className="flex items-center gap-1 text-blue-600 opacity-0 transition-all duration-300 transform translate-x-2">
+              <span className="text-xs font-medium">View Project</span>
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </div>
         </div>
-      </Link>
-    </>
+      </div>
   );
 }
 
 export const CardSkeleton = () => {
   return (
-    <>
-      <div className="flex flex-row w-full pb-5 lg:px-5 gap-3 select-none hover:scale-[1.02] hover:cursor-pointer">
-        <div className="flex flex-col p-2 w-2/3">
-          <div className="flex flex-col gap-2">
+    <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 animate-pulse">
+      {/* Background Gradient Skeleton */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 via-gray-100 to-gray-50/30" />
+      
+      {/* Main Content */}
+      <div className="relative p-6">
+        {/* Header Section */}
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1 min-w-0">
             {/* Title */}
-            <div className="w-32 h-4 bg-gray-300"></div>
-            <div className="w-full h-4 bg-gray-300"></div>
+            <div className="h-6 bg-gray-300 rounded-md mb-2 w-3/4"></div>
+            {/* Description */}
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+            </div>
           </div>
-          {/* Categorys */}
-          <div className="pt-2 flex flex-row gap-2">
-            <div className="w-6 h-3 bg-gray-300"></div>
-            <div className="w-6 h-3 bg-gray-300"></div>
-            <div className="w-6 h-3 bg-gray-300"></div>
-          </div>
-        </div>
-        {/* Image */}
-        <div className="ml-auto">
-          <div className="relative flex flex-col items-end w-[150px] h-[84px] overflow-hidden rounded-md shadow-md bg-gray-100">
-            <div className='w-full h-full bg-gray-300'>
+          
+          {/* Thumbnail */}
+          <div className="ml-6 flex-shrink-0">
+            <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300 shadow-lg">
+              <div className="flex items-center justify-center h-full w-full">
+                <div className="w-8 h-8 bg-gray-400 rounded opacity-50"></div>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Tags Section */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-20"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-14"></div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <div className="w-3 h-3 bg-gray-300 rounded"></div>
+            <div className="h-3 bg-gray-200 rounded w-20"></div>
+          </div>
+          
+          <div className="flex items-center gap-1">
+            <div className="h-3 bg-gray-200 rounded w-24"></div>
+            <div className="w-3 h-3 bg-gray-300 rounded"></div>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
