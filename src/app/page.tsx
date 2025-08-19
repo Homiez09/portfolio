@@ -45,7 +45,7 @@ const Home = async () => {
                 </div>
             </div>
 
-            <ProjectList initialData={response} pageSize={3} />
+            <ProjectList initialData={response} pageSize={4} />
         </div>
     );
 }

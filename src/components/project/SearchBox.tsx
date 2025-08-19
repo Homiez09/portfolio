@@ -23,6 +23,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
     const [searchTerm, setSearchTerm] = useState<string>(search);
     const [tagTerm, setTagTerm] = useState<string>(tag);
 
+    const [isDropdownLoading, setIsDropdownLoading] = useState<boolean>(true);
+
     // Create dropdown items
     const dropdownItems = [
         { key: "All", label: "All Categories" },
@@ -62,6 +64,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
         } catch (error) {
             console.error("Failed to fetch tags", error);
             setTags([]);
+        } finally {
+            setIsDropdownLoading(false);
         }
     }
 
@@ -80,7 +84,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                             className="border border-gray-300 w-full px-4 py-2 pl-10 
                                      rounded-lg text-gray-700 leading-tight 
                                      focus:outline-none
-                                      shadow-sm 
+                                        shadow-sm h-9
                                      placeholder-gray-400"
                             onChange={(e) => updateSearchQuery(e)}
                             value={searchTerm}
@@ -104,11 +108,11 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                     </div>
                 </div>
                 <div className="flex w-auto">
-                    <Dropdown>
+                    <Dropdown isDisabled={isDropdownLoading}>
                         <DropdownTrigger>
                             <Button
                                 className="bg-white border border-gray-300
-                                         rounded-lg px-4 py-2 text-gray-700 leading-tight 
+                                         rounded-lg px-4 py-2 h-9 text-gray-700 leading-tight 
                                          focus:outline-none
                                          shadow-sm
                                          min-w-[120px] justify-between"
@@ -142,22 +146,21 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                 </div>
             </div>
             {
-                (search !== "" || tag !== "" && tag !== "All") && <>
+                (search !== "" || tag !== "" && tag !== "All") &&
+                <div className="flex flex-row justify-between">
                     <span className="place-self-start text-gray-600 text-sm">
                         <span className="font-medium text-blue-600">{found}</span> results for projects
                         {(search !== "") && <span className="font-medium"> matching "{search}"</span>}
                         {(tag !== "" && tag !== "All") && <span className="font-medium"> in {tag}</span>}
                         <span className="text-gray-500"> sorted by last created.</span>
-                        <span
-                            className="hover:cursor-pointer text-red-500 place-self-end text-sm 
-                             px-3 py-1 rounded-md 
-                             border border-transparent ml-1"
-                            onClick={clearQuery}
-                        >
-                            Clear filter
-                        </span>
                     </span>
-                </>
+                    <span
+                        className="hover:cursor-pointer text-red-500 border border-transparent ml-1 flex-shrink-0"
+                        onClick={clearQuery}
+                    >
+                        Clear filter
+                    </span>
+                </div>
             }
         </div>
     );

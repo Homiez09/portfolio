@@ -1,3 +1,5 @@
+'use client';
+
 import { IProjectContent } from '@/interface/project-content';
 import { Card, CardSkeleton } from './Card';
 import { kanit } from '@/libs/fonts';
@@ -36,7 +38,7 @@ export const CardListSkeleton = () => {
     return (
         <>
             <div className={`flex flex-col gap-5 justify-center w-full`}>
-                {[0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
+                {Array(4).fill(0).map((_, key) => <CardSkeleton key={key} />)}
             </div>
         </>
     )

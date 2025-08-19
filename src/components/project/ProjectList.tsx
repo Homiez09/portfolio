@@ -56,7 +56,7 @@ export const ProjectList: FC<ProjectListProps> = ({ initialData, pageSize = 6 })
                 PROJECTS
             </p>
             <SearchBox search={search} tag={tag} found={data.meta?.pagination.total} />
-            <CardList projects={data.data} isLoading={loading} />
+            <CardList projects={data.data} />
             <Pagination
                 showControls
                 page={currentPage}
