@@ -36,7 +36,7 @@ export const CardListSkeleton = () => {
     return (
         <>
             <div className={`flex flex-col gap-5 justify-center w-full`}>
-                {[0, 0, 0].map((_, key) => <CardSkeleton key={key} />)}
+                {Array(4).fill(0).map((_, key) => <CardSkeleton key={key} />)}
             </div>
         </>
     )
