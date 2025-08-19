@@ -1,3 +1,5 @@
+'use client';
+
 import { IProjectContent } from '@/interface/project-content';
 import { Card, CardSkeleton } from './Card';
 import { kanit } from '@/libs/fonts';

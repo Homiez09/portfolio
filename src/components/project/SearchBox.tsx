@@ -23,6 +23,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
     const [searchTerm, setSearchTerm] = useState<string>(search);
     const [tagTerm, setTagTerm] = useState<string>(tag);
 
+    const [isDropdownLoading, setIsDropdownLoading] = useState<boolean>(true);
+
     // Create dropdown items
     const dropdownItems = [
         { key: "All", label: "All Categories" },
@@ -62,6 +64,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
         } catch (error) {
             console.error("Failed to fetch tags", error);
             setTags([]);
+        } finally {
+            setIsDropdownLoading(false);
         }
     }
 
@@ -104,7 +108,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                     </div>
                 </div>
                 <div className="flex w-auto">
-                    <Dropdown>
+                    <Dropdown isDisabled={isDropdownLoading}>
                         <DropdownTrigger>
                             <Button
                                 className="bg-white border border-gray-300

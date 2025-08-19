@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
-import { CategoryList } from "@/components/project/CategoryList";
 import { timeFormat } from "@/libs/timeFormat";
 import Image from "next/image";
 import { ImageViewer } from "@/components/theme/ImageViewer";
 import { IProjectContent } from '@/interface/project-content';
+import { TagList } from '../project/TagList';
 
 interface ProjectContentProps {
     project: IProjectContent;
@@ -39,7 +39,7 @@ export const ProjectContent = ({ project }: ProjectContentProps) => {
                     {/* Title */}
                     <p className='text-3xl font-bold'>{project.title}</p>
                     <div className="flex flex-row gap-1">
-                        <CategoryList categorys={project.tags} isSearchTag />
+                        <TagList categorys={project.tags} isSearchTag />
                     </div>
                 </div>
                 

@@ -1,20 +1,26 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { timeCardFormat } from '@/libs/timeFormat';
-import { CategoryList } from './CategoryList';
 import { IProjectContent } from '@/interface/project-content';
+import { TagList } from './TagList';
 
-export const Card = ({ props }: { props: IProjectContent }) => {
+interface CardProps {
+  props: IProjectContent;
+}
+
+export function Card({ props }: CardProps) {
   return (
-
-      <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 transition-all duration-500 ease-out">
+    <Link href={`project/${props.documentId}`} className="block">
+      <div className="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-gray-100 cursor-pointer">
         {/* Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-purple-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Main Content */}
         <div className="relative p-6">
           {/* Header Section */}
-          <Link href={`project/${props.documentId}`} className="flex items-start justify-between mb-4">
+          <div className="flex items-start justify-between mb-4">
             <div className="flex-1 min-w-0">
               <h3 className={`text-xl font-bold text-gray-900 mb-2 line-clamp-2 transition-colors duration-300 group-hover:text-blue-500 `}>
                 {props.title}
@@ -44,10 +50,10 @@ export const Card = ({ props }: { props: IProjectContent }) => {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
               </div>
             </div>
-          </Link>
+          </div>
 
           {/* Tags Section */}
-          <CategoryList categorys={props.tags} />
+          <TagList categorys={props.tags} isSearchTag />
 
           {/* Footer */}
           <div className="flex items-center justify-between text-xs text-gray-500">
@@ -58,7 +64,7 @@ export const Card = ({ props }: { props: IProjectContent }) => {
               {timeCardFormat(props.createdAt)}
             </span>
             
-            <div className="flex items-center gap-1 text-blue-600 opacity-0 transition-all duration-300 transform translate-x-2">
+            <div className="flex items-center gap-1 text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
               <span className="text-xs font-medium">View Project</span>
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -67,6 +73,7 @@ export const Card = ({ props }: { props: IProjectContent }) => {
           </div>
         </div>
       </div>
+    </Link>
   );
 }
 
