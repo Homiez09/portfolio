@@ -134,30 +134,45 @@ export async function POST(request: Request) {
           pc.updated_at AS "updatedAt", 
           pc.published_at AS "publishedAt", 
           pc.content,
-          COALESCE(
-            json_agg(
-              CASE 
-                WHEN t.id IS NOT NULL THEN
-                  jsonb_build_object(
-                    'id', t.id,
-                    'documentId', t.document_id,
-                    'name', t.name,
-                    'createdAt', t.created_at,
-                    'updatedAt', t.updated_at,
-                    'publishedAt', t.published_at
-                  )
-                ELSE NULL
-              END
-              ORDER BY t.id DESC
-            ) FILTER (WHERE t.id IS NOT NULL),
-            '[]'::json
-          ) AS tags
+          COALESCE(tags_json.tags, '[]') AS tags,
+    			COALESCE(banner_json.banner) AS banner
         FROM project_contents pc
         ${tagJoinCondition}
         LEFT JOIN project_contents_tags_lnk pct ON pc.id = pct.project_content_id
         LEFT JOIN tags t ON pct.tag_id = t.id
+				LEFT JOIN LATERAL (
+					SELECT json_agg(jsonb_build_object(
+						'id', t.id,
+						'documentId', t.document_id,
+						'name', t.name,
+						'createdAt', t.created_at,
+						'updatedAt', t.updated_at,
+						'publishedAt', t.published_at
+					) ORDER BY t.id DESC) AS tags
+					FROM project_contents_tags_lnk pct
+					JOIN tags t ON pct.tag_id = t.id
+					WHERE pct.project_content_id = pc.id
+				) tags_json ON true
+				LEFT JOIN LATERAL (
+					SELECT 
+							COALESCE(
+									jsonb_build_object(
+											'id', f.id,
+											'name', f.name,
+											'url', f.url,
+											'order', fr."order"
+									), 
+									'{}'
+							) AS banner
+					FROM files_related_mph fr
+					JOIN files f ON f.id = fr.file_id
+					WHERE fr.related_id = pc.id
+						AND fr.related_type = 'api::project-content.project-content'
+						AND fr.field = 'banner'
+					ORDER BY fr."order" ASC
+					LIMIT 1
+				) banner_json ON true
         WHERE ${whereClause}
-        GROUP BY pc.id
         ORDER BY 
           ${searchTerm ? `
             CASE 
