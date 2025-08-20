@@ -90,8 +90,8 @@ export const ImageViewer = ({ images, initialIndex, isOpen, onClose }: ImageView
                         <Image
                             src={images[currentIndex].url}
                             alt={`Screenshot ${currentIndex + 1}`}
-                            width={images[currentIndex].width}
-                            height={images[currentIndex].height}
+                            width={images[currentIndex]?.width}
+                            height={images[currentIndex]?.height}
                             className="object-contain w-full h-full rounded-xl"
                             priority
                         />
