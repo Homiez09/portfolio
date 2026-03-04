@@ -1,11 +1,9 @@
-import Link from "next/link";
 import packageJson from "../../package.json"
 
 export default function Footer() {
     return (
-        <footer className="flex flex-row items-center justify-center w-full h-12 border-t text-sm">
-            <Link href="https://github.com/Homiez09">© 2024 | Made with <span className="text-red-500">♥</span> by <strong>Homiez09</strong> <span className="font-bold text-[#0070f3]">v{packageJson.version}</span></Link>
-            
+        <footer className="flex flex-row items-center justify-center w-full h-16 mt-10 border-t border-gray-100 text-sm text-gray-400">
+            <span>© {new Date().getFullYear()} Portfolio | v{packageJson.version}</span>
         </footer>
     )
 }
