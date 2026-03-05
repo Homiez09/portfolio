@@ -110,9 +110,11 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                         }}
                     >
                         <DropdownItem key="All">ALL CLASSES</DropdownItem>
-                        {tags.map((t) => (
-                            <DropdownItem key={t.name}>{t.name}</DropdownItem>
-                        ))}
+                        <>
+                            {tags.map((t) => (
+                                <DropdownItem key={t.name}>{t.name}</DropdownItem>
+                            ))}
+                        </>
                     </DropdownMenu>
                 </Dropdown>
             </div>
