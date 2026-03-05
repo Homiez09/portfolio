@@ -56,7 +56,8 @@ export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0
                 const res = await axios.get('/api/tag/getAll');
                 setTags(res.data.data || []);
             } catch (error) {
-                console.error("Failed to fetch tags", error);
+                // Silently fail for the client
+                setTags([]);
             } finally {
                 setIsLoadingTags(false);
             }

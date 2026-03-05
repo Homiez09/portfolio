@@ -18,7 +18,6 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Error in getAll API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -23,10 +23,6 @@ export const Navbar = () => {
                 </Link>
                 
                 <div className="flex gap-4 md:gap-8 items-center">
-                    <div className="hidden lg:flex gap-4 text-[10px] text-emerald-500/60 uppercase tracking-widest mr-4 font-mono">
-                        <span>HP: <span className="text-emerald-400">100/100</span></span>
-                        <span>MP: <span className="text-emerald-400">100/100</span></span>
-                    </div>
                     <Link href="/" className={`text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all font-mono ${
                         pathname === '/' ? 'text-emerald-400 [text-shadow:0_0_8px_#34d399]' : 'text-emerald-800 hover:text-emerald-400'
                     }`}>

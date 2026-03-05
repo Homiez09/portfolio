@@ -38,7 +38,7 @@ export const ProjectList: FC<ProjectListProps> = ({ initialData, pageSize = 6 })
             });
             setData(response.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // Silently fail for the client
         } finally {
             setLoading(false);
         }

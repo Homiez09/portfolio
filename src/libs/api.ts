@@ -42,7 +42,7 @@ export async function getContentsLogic({
 
       if (res.status === 200) return res.data;
     } catch (apiError) {
-      console.warn('External API failed, falling back to database');
+      // Proceed to fallback
     }
   }
 
@@ -131,7 +131,7 @@ export async function getProjectById(id: string) {
       // Strapi returns { data: { ... } }, so we return it directly
       if (res.status === 200 && res.data) return res.data;
     } catch (err) {
-      console.warn('External API failed for single project, falling back to database');
+      // Proceed to fallback
     }
   }
 
@@ -170,7 +170,6 @@ export async function getProjectById(id: string) {
     // Wrap database result in { data: ... } to match API format
     return { data: dbRes.rows[0] || null };
   } catch (err) {
-    console.error('Database fetch failed for single project:', err);
     return { data: null };
   }
 }

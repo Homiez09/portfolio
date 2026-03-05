@@ -12,7 +12,7 @@ export async function GET() {
 
         if (res.status === 200) return NextResponse.json({ data: res.data.data })
     } catch (err) {
-        console.log('Error fetching from external API:', err);
+        // Silently fail or proceed to fallback
     }
 
     try {

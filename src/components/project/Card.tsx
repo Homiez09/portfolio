@@ -1,17 +1,27 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { timeCardFormat } from '@/libs/timeFormat';
 import { IProjectContent } from '@/interface/project-content';
+import { TagList } from './TagList';
 
 interface CardProps {
   props: IProjectContent;
 }
 
 export function Card({ props }: CardProps) {
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/project/${props.documentId}`);
+  };
+
   return (
-    <Link href={`project/${props.documentId}`} className="group block w-full h-full relative">
+    <div 
+      onClick={handleCardClick}
+      className="group block w-full h-full relative cursor-crosshair"
+    >
       {/* Decorative borders (Neon Glow effect on hover) */}
       <div className="absolute -inset-[1px] bg-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-[3px]"></div>
       
@@ -54,22 +64,13 @@ export function Card({ props }: CardProps) {
             {props.description}
           </p>
           
-          <div className="flex flex-wrap gap-2 pt-4 mt-auto">
-            {props.tags?.slice(0,3).map((t, i) => (
-                <span key={i} className="px-2 py-0.5 text-[9px] font-mono border border-emerald-800/60 text-emerald-500 uppercase bg-emerald-950/50">
-                    {t.name}
-                </span>
-            ))}
-            {props.tags && props.tags.length > 3 && (
-                <span className="px-2 py-0.5 text-[9px] font-mono border border-emerald-900/30 text-emerald-700 uppercase bg-transparent">
-                    +{props.tags.length - 3}
-                </span>
-            )}
+          <div className="flex flex-wrap gap-2 pt-4 mt-auto" onClick={(e) => e.stopPropagation()}>
+            <TagList categorys={props.tags} isSearchTag />
           </div>
         </div>
 
       </div>
-    </Link>
+    </div>
   );
 }
 
