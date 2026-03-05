@@ -12,9 +12,10 @@ export function Tag({ tag, handleTagClick }: { tag: ITag; handleTagClick: (e: Re
     return (
         <button
             onClick={handleClick}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-800 transition-colors duration-200 cursor-pointer"
+            className="group relative inline-flex items-center gap-1.5 px-2 py-0.5 border border-emerald-900/50 bg-emerald-950/30 text-[9px] font-mono font-bold text-emerald-500 hover:border-emerald-400 hover:text-emerald-300 transition-all duration-200 uppercase tracking-widest overflow-hidden"
         >
-            <div className="w-1.5 h-1.5 rounded-full bg-current opacity-60" />
+            <span className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            <div className="w-1 h-1 bg-emerald-500 group-hover:animate-pulse" />
             {tag.name}
         </button>
     );

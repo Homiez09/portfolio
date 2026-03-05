@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ITag } from "@/interface/tag";
 import { Tag } from './Tag';
@@ -13,14 +13,15 @@ export function TagList({ categorys, isSearchTag = false }: { categorys: ITag[],
   const displayedTags = showAll ? categorys : categorys.slice(0, 3);
 
   const createTagUrl = (tagName: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
     params.set('tag', tagName);
+    params.set('page', '1');
     return `/search?${params.toString()}`;
   };
 
   const handleTagClick = (e: React.MouseEvent, tagName: string) => {
     e.stopPropagation();
-    if (isSearchTag) router.push(createTagUrl(tagName));
+    router.push(createTagUrl(tagName));
   };
 
   const handleMoreClick = (e: React.MouseEvent) => {
@@ -35,28 +36,31 @@ export function TagList({ categorys, isSearchTag = false }: { categorys: ITag[],
     setShowAll(false);
   };
 
+  if (!categorys || categorys.length === 0) return null;
+
   return (
-    <div className="flex flex-wrap gap-2 mb-4">
-      {displayedTags.map((tag: any, key: any) => (
+    <div className="flex flex-wrap gap-2">
+      {displayedTags.map((tag, key) => (
         <Tag key={key} tag={tag} handleTagClick={handleTagClick} />
       ))}
+      
       {categorys.length > 3 && !showAll && (
         <button
           onClick={handleMoreClick}
-          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 cursor-pointer"
+          className="inline-flex items-center px-2 py-0.5 border border-emerald-900/30 bg-transparent text-[9px] font-mono text-emerald-700 hover:text-emerald-500 hover:border-emerald-800 transition-all uppercase tracking-widest"
         >
-          +{categorys.length - 3} more
+          +{categorys.length - 3} MORE_DATA
         </button>
       )}
+      
       {showAll && categorys.length > 3 && (
         <button
           onClick={handleShowLessClick}
-          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 cursor-pointer"
+          className="inline-flex items-center px-2 py-0.5 border border-emerald-900/30 bg-transparent text-[9px] font-mono text-emerald-700 hover:text-emerald-500 hover:border-emerald-800 transition-all uppercase tracking-widest"
         >
-          Show less
+          [-] COLLAPSE
         </button>
       )}
     </div>
-
   )
 }

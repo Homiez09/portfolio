@@ -1,28 +1,29 @@
 import { ProjectList } from "@/components/project/ProjectList";
 import { IContent } from "@/interface/content";
-import axios from "axios";
 import { FC } from "react";
+import { getContentsLogic } from "@/libs/api";
 
 interface SearchPageProps {
-    searchParams: { [key: string]: string | string[] | undefined };
-}
-
-const getContents = async (search: string, tag: string) => {
-    try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/content/getAll`, {
-            search,
-            tag
-        });
-        return response.data;
-    } catch (error) {
-        return { data: [] };
-    }
+    searchParams: { [key: string]: string | undefined };
 }
 
 const SearchPage: FC<SearchPageProps> = async ({ searchParams }) => {
-    const response = await getContents(searchParams.search ? String(searchParams.search) : "", (searchParams.tag || String(searchParams.tag) === 'All') ? String(searchParams.tag) : "") as IContent;
+    const search = searchParams.search || "";
+    const tag = (searchParams.tag && searchParams.tag !== 'All') ? searchParams.tag : "";
+    const page = parseInt(searchParams.page || "1");
 
-    return <ProjectList initialData={response} />;
+    const response = await getContentsLogic({
+        search,
+        tag,
+        page,
+        pageSize: 6
+    }) as unknown as IContent;
+
+    return (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-32">
+            <ProjectList initialData={response} />
+        </div>
+    );
 };
 
 export default SearchPage;

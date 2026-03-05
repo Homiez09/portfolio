@@ -20,7 +20,7 @@ export async function POST() {
             { status: res.status }
         );
     } catch (err) {
-        console.log('Error fetching data:', err);
+        // Silently fail or proceed to fallback
     }
 
     try {

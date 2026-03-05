@@ -1,7 +1,7 @@
 'use client';
 
-import React, { ChangeEvent, FC, useCallback, useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import React, { FC, useCallback, useEffect, useState, useTransition } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { ITag } from "@/interface/tag";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
@@ -12,156 +12,124 @@ interface SearchBoxProps {
     found?: number;
 }
 
-export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0, }) => {
+export const SearchBox: FC<SearchBoxProps> = ({ search = '', tag = '', found = 0 }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const pathname = usePathname();
+    const [isPending, startTransition] = useTransition();
 
-    const searchInputRef = useRef<HTMLInputElement>(null);
-
-    const [tags, setTags] = useState<ITag[] | null>(null);
-    const [searchTerm, setSearchTerm] = useState<string>(search);
-    const [tagTerm, setTagTerm] = useState<string>(tag);
-
-    const [isDropdownLoading, setIsDropdownLoading] = useState<boolean>(true);
-
-    // Create dropdown items
-    const dropdownItems = [
-        { key: "All", label: "All Categories" },
-        ...(tags || []).map(tag => ({ key: tag.name, label: tag.name }))
-    ];
+    const [tags, setTags] = useState<ITag[]>([]);
+    const [searchTerm, setSearchTerm] = useState(search);
+    const [tagTerm, setTagTerm] = useState(tag);
+    const [isLoadingTags, setIsLoadingTags] = useState(true);
 
     const createQueryString = useCallback(
-        (name: string, value: string) => {
-            const params = new URLSearchParams(searchParams.toString())
-            params.set(name, value)
-
-            return params.toString()
+        (paramsToUpdate: Record<string, string>) => {
+            const params = new URLSearchParams(searchParams.toString());
+            Object.entries(paramsToUpdate).forEach(([name, value]) => {
+                if (value) params.set(name, value);
+                else params.delete(name);
+            });
+            params.set('page', '1');
+            return params.toString();
         },
         [searchParams]
-    )
+    );
 
-    const updateSearchQuery = (e?: ChangeEvent<HTMLInputElement>) => {
-        router.push('search?' + createQueryString('search', e!.target.value));
-        setSearchTerm(e!.target.value);
-    }
+    const handleSearch = (value: string) => {
+        setSearchTerm(value);
+        startTransition(() => {
+            const query = createQueryString({ search: value });
+            router.push(`?${query}`, { scroll: false });
+        });
+    };
 
-    const updateTagQuery = (key: string | number) => {
-        const value = key.toString();
-        router.push('search?' + createQueryString('tag', value));
+    const handleTagChange = (key: string | number) => {
+        const value = key === 'All' ? '' : key.toString();
         setTagTerm(value);
-    }
-
-    const clearQuery = () => {
-        setSearchTerm("");
-        setTagTerm("")
-        router.push("/search");
-    }
-
-    const fetchTags = async () => {
-        try {
-            await axios.post(`${process.env.NEXT_PUBLIC_FRONTEND_URI}/api/tag/getAll`).then((res) => setTags(res.data.data));
-        } catch (error) {
-            console.error("Failed to fetch tags", error);
-            setTags([]);
-        } finally {
-            setIsDropdownLoading(false);
-        }
-    }
+        const query = createQueryString({ tag: value });
+        router.push(`?${query}`, { scroll: false });
+    };
 
     useEffect(() => {
+        const fetchTags = async () => {
+            try {
+                const res = await axios.get('/api/tag/getAll');
+                setTags(res.data.data || []);
+            } catch (error) {
+                // Silently fail for the client
+                setTags([]);
+            } finally {
+                setIsLoadingTags(false);
+            }
+        };
         fetchTags();
-        if (pathname === "/search") searchInputRef.current?.focus();
     }, []);
 
+    useEffect(() => {
+        setSearchTerm(search);
+        setTagTerm(tag);
+    }, [search, tag]);
+
     return (
-        <div className="w-full p-2 flex flex-col gap-2">
-            <div className="flex flex-col sm:flex-row w-full gap-3">
-                <div className="flex w-full">
-                    <div className="relative w-full">
-                        <input
-                            ref={searchInputRef}
-                            className="border border-gray-300 w-full px-4 py-2 pl-10 
-                                     rounded-lg text-gray-700 leading-tight 
-                                     focus:outline-none
-                                        shadow-sm h-9
-                                     placeholder-gray-400"
-                            onChange={(e) => updateSearchQuery(e)}
-                            value={searchTerm}
-                            placeholder="Find a project..."
-                        />
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <svg
-                                className="w-5 h-5 text-gray-400"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                />
-                            </svg>
+        <div className="w-full flex flex-col gap-4 py-6 border-b border-emerald-900/50 mb-8">
+            <div className="flex flex-col md:flex-row gap-4 font-mono">
+                <div className="relative flex-grow group">
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500 font-bold">{'>'}</span>
+                    <input
+                        className="w-full h-14 bg-neutral-900/80 border border-emerald-900/80 px-10 
+                                 text-emerald-400 placeholder-emerald-800/50 focus:border-emerald-500 
+                                 focus:ring-0 focus:bg-neutral-900 transition-all duration-200 uppercase tracking-widest text-sm"
+                        onChange={(e) => handleSearch(e.target.value)}
+                        value={searchTerm}
+                        placeholder="INPUT QUERY..."
+                    />
+                    {isPending && (
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 text-xs animate-pulse tracking-widest">
+                            [PROCESSING]
                         </div>
-                    </div>
+                    )}
                 </div>
-                <div className="flex w-auto">
-                    <Dropdown isDisabled={isDropdownLoading}>
-                        <DropdownTrigger>
-                            <Button
-                                className="bg-white border border-gray-300
-                                         rounded-lg px-4 py-2 h-9 text-gray-700 leading-tight 
-                                         focus:outline-none
-                                         shadow-sm
-                                         min-w-[120px] justify-between"
-                                endContent={
-                                    <svg
-                                        className="fill-current h-4 w-4 transition-transform duration-200"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                    >
-                                        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                }
-                            >
-                                {tagTerm === "" || tagTerm === "All" ? "All Categories" : tagTerm}
-                            </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu
-                            aria-label="Category filter"
-                            onAction={(key) => updateTagQuery(key)}
-                            selectedKeys={new Set([tagTerm === "" ? "All" : tagTerm])}
-                            selectionMode="single"
-                            items={dropdownItems}
+
+                <Dropdown isDisabled={isLoadingTags} classNames={{ content: "bg-neutral-900 border border-emerald-500 rounded-none min-w-[200px]" }}>
+                    <DropdownTrigger>
+                        <Button
+                            className="h-14 bg-neutral-900/80 border border-emerald-900/80 px-8 
+                                     font-bold text-emerald-500 hover:border-emerald-500 hover:bg-neutral-900 transition-all uppercase rounded-none tracking-widest text-xs w-full md:w-auto"
                         >
-                            {(item) => (
-                                <DropdownItem key={item.key}>
-                                    {item.label}
-                                </DropdownItem>
-                            )}
-                        </DropdownMenu>
-                    </Dropdown>
-                </div>
-            </div>
-            {
-                (search !== "" || tag !== "" && tag !== "All") &&
-                <div className="flex flex-row justify-between">
-                    <span className="place-self-start text-gray-600 text-sm">
-                        <span className="font-medium text-blue-600">{found}</span> results for projects
-                        {(search !== "") && <span className="font-medium"> matching "{search}"</span>}
-                        {(tag !== "" && tag !== "All") && <span className="font-medium"> in {tag}</span>}
-                        <span className="text-gray-500"> sorted by last created.</span>
-                    </span>
-                    <span
-                        className="hover:cursor-pointer text-red-500 border border-transparent ml-1 flex-shrink-0"
-                        onClick={clearQuery}
+                            {tagTerm ? `CLASS: ${tagTerm}` : "CLASS: ALL"}
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu
+                        aria-label="Filter by class"
+                        onAction={handleTagChange}
+                        selectedKeys={new Set([tagTerm || "All"])}
+                        selectionMode="single"
+                        className="text-emerald-400 p-0"
+                        itemClasses={{
+                            base: "rounded-none data-[hover=true]:bg-emerald-500 data-[hover=true]:text-neutral-950 transition-colors py-3 px-4 uppercase font-mono tracking-widest text-xs border-b border-emerald-900/30 last:border-0"
+                        }}
                     >
-                        Clear filter
-                    </span>
-                </div>
-            }
+                        <DropdownItem key="All">ALL CLASSES</DropdownItem>
+                        <>
+                            {tags.map((t) => (
+                                <DropdownItem key={t.name}>{t.name}</DropdownItem>
+                            ))}
+                        </>
+                    </DropdownMenu>
+                </Dropdown>
+            </div>
+            
+            <div className="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
+                <span className="text-emerald-600">[{found} ENTRIES FOUND]</span>
+                {(search || tag) && (
+                    <button 
+                        onClick={() => { setSearchTerm(''); setTagTerm(''); router.push('/'); }}
+                        className="text-red-500 hover:text-red-400 hover:underline decoration-red-500/50"
+                    >
+                        [ CLEAR_CACHE ]
+                    </button>
+                )}
+            </div>
         </div>
     );
-}
+};
