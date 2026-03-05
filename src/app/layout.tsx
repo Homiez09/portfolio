@@ -10,43 +10,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata = {
   icons: '/icon.webp',
-  title: 'Phumrapee Soenvanichakul',
-  description: `I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
-  I'm a student at Kasetsart University, majoring in Computer Science.
-  I'm interested in software engineering, full-stack`,
-  images: [
-    {
-      url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
-      width: 800,
-      height: 600,
-    },
-    {
-      url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
-      width: 1800,
-      height: 1600,
-      alt: 'Phumrapee Soenvanichakul (HomieZ09)',
-    },
-  ],
+  title: 'Phumrapee Soenvanichakul | SYSTEM TERMINAL',
+  description: 'Mission logs and tech tree of a Software Engineer.',
   openGraph: {
-    title: 'Phumrapee Soenvanichakul',
-    description: `
-    I'm Phumrapee Soenvanichakul | ภูมิระพี เสริญวณิชกุล (GH: HomieZ09) This is my portfolio website. 
-    I'm a student at Kasetsart University, majoring in Computer Science.
-    I'm interested in software engineering, full-stack`,
-    url: 'https:phumrapee.me',
-    images: [
-      {
-        url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
-        width: 800,
-        height: 600,
-      },
-      {
-        url: 'https://lh3.googleusercontent.com/a/ACg8ocJl6Yr607SyJ-4qtKDVks21ElvmMNHsGWMtyEgoQI8R1Gs=s288-c-no',
-        width: 1800,
-        height: 1600,
-        alt: 'Phumrapee Soenvanichakul (HomieZ09)',
-      },
-    ],
+    title: 'Phumrapee Soenvanichakul | SYSTEM TERMINAL',
+    description: 'Mission logs and tech tree of a Software Engineer.',
+    url: '/',
   },
 };
 
@@ -56,24 +25,39 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <Analytics />
       <SpeedInsights/>
-      <body className={kanit.className}>
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
+      <body className={`${kanit.className} bg-neutral-950 text-emerald-400 antialiased selection:bg-emerald-500 selection:text-black overflow-x-hidden min-h-screen`}>
+        {/* Game Grid Background & Glow */}
+        <div className="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#04785715_1px,transparent_1px),linear-gradient(to_bottom,#04785715_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+        <div className="fixed inset-0 z-[-1] bg-[radial-gradient(circle_800px_at_50%_-30%,#00ff6610,transparent)]"></div>
+        <div className="fixed inset-0 z-[-1] bg-black/40"></div>
+        
+        <Toaster 
+          position="top-center" 
+          toastOptions={{
+            style: {
+              borderRadius: '0px',
+              background: '#0a0a0a',
+              color: '#34d399',
+              border: '1px solid #059669',
+              fontFamily: 'monospace',
+              textTransform: 'uppercase',
+              fontSize: '12px'
+            },
+          }} 
         />
         <Webring />
-        <div className="container min-h-screen">
+        <div className="flex flex-col min-h-screen relative">
           <AntdStyledComponentsRegistry>
             <Navbar />
-            <div className="px-4">
+            <main className="flex-grow relative">
               {children}
-            </div>
+            </main>
           </AntdStyledComponentsRegistry>
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

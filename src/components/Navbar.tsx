@@ -1,47 +1,43 @@
 'use client';
 
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { motion } from "framer-motion";
-import { useRouter, usePathname } from 'next/navigation';
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { usePathname } from 'next/navigation';
 import Link from "next/link";
+import { useEffect, useState } from 'react';
 
 export const Navbar = () => {
-    const router = useRouter();
-    const [resumeURI, setResumeURI] = useState<string>("");
-
-    const fetchResume = async () => {
-        await axios.post("/api/resume").then((res) => setResumeURI(res.data.uri)).catch((err) => console.log(err));
-    }
+    const pathname = usePathname();
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        fetchResume();
-    }, [])
-
-    const buttonHandler = (path: string) => {
-        // switch (path) {
-        //     case "download-resume":
-        //         saveAs("https://drive.google.com/file/d/1LOlhSHPYwd7BFLTp26WTBzdUirui-l9k/view?usp=sharing", "RESUME_Phumrapee_Soenvanichakul.pdf");
-        //         toast.success('Successfully toasted!');
-        //         break;
-        // }
-        // go to new tab
-        window.open(resumeURI, "_blank");
-    }
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+    
     return (
-        <>
-            <div className={`flex container justify-between border-b border-gray-300 p-5 pb-3 top-0 bg-white ${(usePathname() === "/") ? 'absolute z-[999]' : ''}`}>
-                <Link className="flex font-bold text-2xl tracking-tight hover:cursor-pointer" href="/">Portfolio</Link>
-                <motion.button
-                    disabled={!resumeURI}
-                    onClick={() => buttonHandler("download-resume")}
-                    whileHover={{ scale: 1.05 }}
-                    className={`flex space-x-2 items-center p-2 rounded-full border-black border ${resumeURI ? 'hover:cursor-pointer' : 'cursor-not-allowed opacity-35'}`}>
-                    {resumeURI ? <Icon ssr icon="material-symbols-light:download" /> : <Icon ssr icon="svg-spinners:270-ring" />}
-                    <span className="text-sm">Download Resume</span>
-                </motion.button>
-            </div>
-        </>
+        <header className="fixed top-0 left-0 right-0 z-[1000] p-2 md:p-4 pointer-events-none">
+            <nav className={`pointer-events-auto max-w-6xl mx-auto flex justify-between items-center px-4 md:px-6 py-2 md:py-3 bg-neutral-950/90 backdrop-blur-md border-b-2 border-emerald-500/50 rounded-none transition-all duration-300 ${scrolled ? 'shadow-[0_0_20px_rgba(16,185,129,0.15)]' : ''}`}>
+                <Link href="/" className="group flex items-center gap-2 md:gap-3">
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]"></div>
+                    <span className="font-black text-sm md:text-xl tracking-widest text-emerald-400 uppercase font-mono">SYS_TERM</span>
+                </Link>
+                
+                <div className="flex gap-4 md:gap-8 items-center">
+                    <Link href="/" className={`text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all font-mono ${
+                        pathname === '/' ? 'text-emerald-400 [text-shadow:0_0_8px_#34d399]' : 'text-emerald-800 hover:text-emerald-400'
+                    }`}>
+                        [ QUESTS ]
+                    </Link>
+                    <Link href="/search" className={`text-[10px] md:text-sm font-bold uppercase tracking-widest transition-all font-mono ${
+                        pathname === '/search' ? 'text-emerald-400 [text-shadow:0_0_8px_#34d399]' : 'text-emerald-800 hover:text-emerald-400'
+                    }`}>
+                        [ SEARCH ]
+                    </Link>
+                    <span className="text-[10px] md:text-sm font-bold uppercase tracking-widest text-emerald-900 line-through font-mono cursor-not-allowed">
+                        [ LORE ]
+                    </span>
+                </div>
+            </nav>
+        </header>
     )
 }
