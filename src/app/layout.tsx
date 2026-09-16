@@ -7,6 +7,10 @@ import Footer from "@/components/Footer";
 import AntdStyledComponentsRegistry from "@/components/AntdStyleRegistry";
 import { kanit } from "@/libs/fonts";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Script from "next/script";
+
+/** Google AdSense publisher ID — ต้องตรงกับ public/ads.txt */
+const ADSENSE_CLIENT_ID = "ca-pub-2260579611756913";
 
 export const metadata = {
   icons: '/icon.webp',
@@ -16,6 +20,9 @@ export const metadata = {
     title: 'Phumrapee Soenvanichakul | SYSTEM TERMINAL',
     description: 'Mission logs and tech tree of a Software Engineer.',
     url: '/',
+  },
+  other: {
+    'google-adsense-account': ADSENSE_CLIENT_ID,
   },
 };
 
@@ -29,6 +36,14 @@ export default function RootLayout({
       <Analytics />
       <SpeedInsights/>
       <body className={`${kanit.className} bg-neutral-950 text-emerald-400 antialiased selection:bg-emerald-500 selection:text-black overflow-x-hidden min-h-screen`}>
+        <Script
+          id="google-adsense"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Game Grid Background & Glow */}
         <div className="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#04785715_1px,transparent_1px),linear-gradient(to_bottom,#04785715_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         <div className="fixed inset-0 z-[-1] bg-[radial-gradient(circle_800px_at_50%_-30%,#00ff6610,transparent)]"></div>
